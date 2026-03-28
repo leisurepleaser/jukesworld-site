@@ -563,3 +563,30 @@ hr.soft {
 
   .main-nav.open { display: flex; }
 }
+
+.track-preview-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(123,110,246,0.08), rgba(255,255,255,0.02));
+  box-shadow: var(--shadow);
+}
+
+.track-preview-card h4 {
+  margin: 0.5rem 0 0.45rem;
+  font-size: 1.1rem;
+}
+
+.track-preview-card p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.track-preview-card audio {
+  width: 100%;
+  display: block;
+  border-radius: 999px;
+}
