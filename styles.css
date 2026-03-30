@@ -590,3 +590,29 @@ hr.soft {
   display: block;
   border-radius: 999px;
 }
+.brand-mark.brand-mark-image {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: #05070b;
+}
+
+.brand-mark.brand-mark-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-artwork {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+}
