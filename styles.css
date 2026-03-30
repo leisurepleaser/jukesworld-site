@@ -646,3 +646,56 @@ hr.soft {
   color: var(--muted);
   line-height: 1.6;
 }
+.brand-mark.brand-mark-image {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: #05070b;
+}
+
+.brand-mark.brand-mark-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.project-series {
+  margin-top: 1rem;
+}
+
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+.project-piece {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(195,154,102,0.08), rgba(255,255,255,0.02));
+  box-shadow: var(--shadow);
+}
+
+.project-piece img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.project-piece figcaption {
+  padding: 0.85rem 1rem 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 960px) {
+  .project-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
