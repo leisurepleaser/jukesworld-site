@@ -616,3 +616,33 @@ hr.soft {
   border-radius: 18px;
   object-fit: cover;
 }
+.art-process-piece {
+  margin-top: 1rem;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(195,154,102,0.08), rgba(255,255,255,0.02));
+  box-shadow: var(--shadow);
+}
+
+.art-process-piece img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.art-process-copy {
+  padding: 1rem;
+}
+
+.art-process-copy h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.art-process-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
