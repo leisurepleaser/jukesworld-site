@@ -9,157 +9,7 @@ if (menuToggle && nav) {
   });
 }
 
-function formatDuration(seconds) {
-  if (!Number.isFinite(seconds)) return "—";
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
-  return `${mins}:${secs}`;
-}
-
-(function initMusicCatalog() {
-  const trackDataScript = document.getElementById("track-data");
-  const catalogList = document.getElementById("catalog-list");
-  const audio = document.getElementById("main-audio-player");
-  const audioSource = document.getElementById("main-audio-source");
-  const playerArt = document.getElementById("player-art");
-  const playerTitle = document.getElementById("player-title");
-  const playerRole = document.getElementById("player-role");
-  const playerCopy = document.getElementById("player-copy");
-  const playerDuration = document.getElementById("player-duration");
-  const playerAvailability = document.getElementById("player-availability");
-  const downloadButton = document.getElementById("download-button");
-  const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-
-  if (!trackDataScript || !catalogList || !audio || !audioSource) return;
-
-  let tracks = [];
-  try {
-    tracks = JSON.parse(trackDataScript.textContent);
-  } catch (error) {
-    console.error("Could not parse track data:", error);
-    return;
-  }
-
-  let currentTrack = null;
-  let itemElements = [];
-  let currentFilter = "all";
-
-  function updatePlayer(track) {
-    currentTrack = track;
-
-    playerArt.src = track.image;
-    playerArt.alt = `${track.title} artwork`;
-    playerTitle.textContent = track.title;
-    playerRole.textContent = track.roleLabel;
-    playerRole.classList.toggle("free", track.roleFilter === "free");
-    playerCopy.textContent = track.blurb;
-    playerAvailability.textContent = track.availability || "Preview stream";
-    playerDuration.textContent = "Loading…";
-
-    audio.pause();
-    audioSource.src = track.preview;
-    audio.load();
-
-    if (track.fullDownload) {
-      downloadButton.href = track.fullDownload;
-      downloadButton.classList.remove("hidden");
-    } else {
-      downloadButton.classList.add("hidden");
-      downloadButton.removeAttribute("href");
-    }
-  }
-
-  function setActiveItem(track, clickedItem) {
-    itemElements.forEach((item) => {
-      const isActive = item === clickedItem;
-      item.classList.toggle("active", isActive);
-      const trigger = item.querySelector(".catalog-trigger");
-      if (trigger) trigger.setAttribute("aria-expanded", String(isActive));
-    });
-
-    updatePlayer(track);
-  }
-
-  function renderItems() {
-    catalogList.innerHTML = "";
-
-    const visibleTracks = tracks.filter((track) => {
-      return currentFilter === "all" ? true : track.roleFilter === currentFilter;
-    });
-
-    visibleTracks.forEach((track) => {
-      const item = document.createElement("article");
-      item.className = "catalog-item";
-      item.dataset.role = track.roleFilter;
-
-      item.innerHTML = `
-        <button class="catalog-trigger" type="button" aria-expanded="false">
-          <img class="catalog-thumb" src="${track.image}" alt="${track.title} artwork" />
-          <div class="catalog-main">
-            <div class="catalog-title-row">
-              <h3>${track.title}</h3>
-              <span class="catalog-role ${track.roleFilter === "free" ? "free" : ""}">${track.roleLabel}</span>
-            </div>
-            <p class="catalog-blurb">${track.blurb}</p>
-          </div>
-          <span class="catalog-arrow">+</span>
-        </button>
-        <div class="catalog-detail">
-          <p>${track.blurb}</p>
-          <small>${track.fullDownload ? "Includes full free download." : "Preview stream only."}</small>
-        </div>
-      `;
-
-      const trigger = item.querySelector(".catalog-trigger");
-      trigger.addEventListener("click", () => {
-        setActiveItem(track, item);
-      });
-
-      catalogList.appendChild(item);
-    });
-
-    itemElements = Array.from(catalogList.querySelectorAll(".catalog-item"));
-
-    if (!visibleTracks.length) return;
-
-    const defaultTrack =
-      visibleTracks.find((track) => currentTrack && track.title === currentTrack.title) ||
-      visibleTracks[0];
-
-    const defaultItem = itemElements.find((item) => {
-      const heading = item.querySelector("h3");
-      return heading && heading.textContent === defaultTrack.title;
-    });
-
-    if (defaultItem) {
-      setActiveItem(defaultTrack, defaultItem);
-    }
-  }
-
-  audio.addEventListener("loadedmetadata", () => {
-    playerDuration.textContent = formatDuration(audio.duration);
-  });
-
-  audio.addEventListener("error", () => {
-    playerDuration.textContent = "Unavailable";
-  });
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      currentFilter = button.dataset.filter || "all";
-
-      filterButtons.forEach((btn) => {
-        btn.classList.toggle("active", btn === button);
-      });
-
-      renderItems();
-    });
-  });
-
-  renderItems();
-})();
-
-(function initLightbox() {
+(function initImageLightbox() {
   const triggers = Array.from(document.querySelectorAll("[data-lightbox-image]"));
   if (!triggers.length) return;
 
@@ -232,4 +82,154 @@ function formatDuration(seconds) {
   });
 
   document.body.appendChild(overlay);
+})();
+
+(function initBeatModal() {
+  const triggers = Array.from(document.querySelectorAll("[data-beat-title]"));
+  const modal = document.getElementById("beat-modal");
+  if (!triggers.length || !modal) return;
+
+  const modalArt = document.getElementById("beat-modal-art");
+  const modalTitle = document.getElementById("beat-modal-title");
+  const modalRole = document.getElementById("beat-modal-role");
+  const modalDescription = document.getElementById("beat-modal-description");
+  const modalNote = document.getElementById("beat-modal-note");
+  const closeButton = document.getElementById("beat-modal-close");
+  const playButton = document.getElementById("beat-play-button");
+  const progress = document.getElementById("beat-progress");
+  const time = document.getElementById("beat-time");
+  const audio = document.getElementById("beat-audio-engine");
+  const downloadButton = document.getElementById("beat-download-button");
+
+  let currentDuration = 0;
+
+  function formatTime(seconds) {
+    if (!Number.isFinite(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+    return `${mins}:${secs}`;
+  }
+
+  function updateTime() {
+    time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(currentDuration)}`;
+  }
+
+  function updatePlayLabel() {
+    playButton.textContent = audio.paused ? "Play Preview" : "Pause";
+  }
+
+  function closeBeatModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    audio.pause();
+    audio.currentTime = 0;
+    progress.value = 0;
+    currentDuration = 0;
+    updateTime();
+    updatePlayLabel();
+  }
+
+  function openBeatModal(trigger) {
+    const title = trigger.dataset.beatTitle || "";
+    const role = trigger.dataset.beatRole || "";
+    const preview = trigger.dataset.beatPreview || "";
+    const image = trigger.dataset.beatImage || "";
+    const description = trigger.dataset.beatDescription || "";
+    const note = trigger.dataset.beatNote || "";
+    const full = trigger.dataset.beatFull || "";
+
+    modalTitle.textContent = title;
+    modalRole.textContent = role;
+    modalRole.classList.toggle("free", role.toLowerCase() === "free");
+    modalDescription.textContent = description;
+    modalNote.textContent = note;
+    modalArt.src = image;
+    modalArt.alt = `${title} artwork`;
+
+    audio.pause();
+    audio.currentTime = 0;
+    currentDuration = 0;
+    progress.value = 0;
+    audio.src = preview;
+    audio.load();
+    updateTime();
+    updatePlayLabel();
+
+    if (full) {
+      downloadButton.href = full;
+      downloadButton.classList.add("show");
+    } else {
+      downloadButton.removeAttribute("href");
+      downloadButton.classList.remove("show");
+    }
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      openBeatModal(trigger);
+    });
+  });
+
+  closeButton.addEventListener("click", closeBeatModal);
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeBeatModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("open")) {
+      closeBeatModal();
+    }
+  });
+
+  playButton.addEventListener("click", async () => {
+    if (!audio.src) return;
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error("Audio playback failed:", error);
+      }
+    } else {
+      audio.pause();
+    }
+
+    updatePlayLabel();
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    currentDuration = audio.duration || 0;
+    progress.value = 0;
+    updateTime();
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (currentDuration > 0) {
+      progress.value = (audio.currentTime / currentDuration) * 100;
+    }
+    updateTime();
+  });
+
+  audio.addEventListener("play", updatePlayLabel);
+  audio.addEventListener("pause", updatePlayLabel);
+
+  audio.addEventListener("ended", () => {
+    audio.currentTime = 0;
+    progress.value = 0;
+    updatePlayLabel();
+    updateTime();
+  });
+
+  progress.addEventListener("input", () => {
+    if (!currentDuration) return;
+    audio.currentTime = (Number(progress.value) / 100) * currentDuration;
+    updateTime();
+  });
+
+  updateTime();
+  updatePlayLabel();
 })();
