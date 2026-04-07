@@ -291,6 +291,31 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
+      justify-content: space-between;
+    }
+
+    .beat-player-left,
+    .beat-player-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .beat-nav-button {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: inherit;
+      border-radius: 999px;
+      padding: 11px 14px;
+      font: inherit;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .beat-nav-button:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.2);
     }
 
     .beat-download {
@@ -332,6 +357,10 @@
       .beat-modal-art {
         min-height: 240px;
         max-height: 320px;
+      }
+
+      .beat-player-actions {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -389,7 +418,7 @@
 
           <div class="beat-grid">
             <article class="beat-card featured">
-              <button class="beat-trigger" type="button" data-title="Nara" data-role="Featured" data-preview="/assets/audio/Nara-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured lead from the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Nara" data-role="Featured" data-preview="/assets/audio/Nara-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured lead from the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Nara" />
                   <span class="beat-open-chip">Listen</span>
@@ -403,7 +432,7 @@
             </article>
 
             <article class="beat-card featured">
-              <button class="beat-trigger" type="button" data-title="Flame" data-role="Featured" data-preview="/assets/audio/Flame-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured cut positioned near the front of the rollout." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Flame" data-role="Featured" data-preview="/assets/audio/Flame-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured cut positioned near the front of the rollout." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Flame" />
                   <span class="beat-open-chip">Listen</span>
@@ -417,7 +446,7 @@
             </article>
 
             <article class="beat-card featured">
-              <button class="beat-trigger" type="button" data-title="Boola" data-role="Featured" data-preview="/assets/audio/Boola-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured selection in the opening group." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Boola" data-role="Featured" data-preview="/assets/audio/Boola-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured selection in the opening group." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Boola" />
                   <span class="beat-open-chip">Listen</span>
@@ -431,7 +460,7 @@
             </article>
 
             <article class="beat-card featured">
-              <button class="beat-trigger" type="button" data-title="Wink" data-role="Featured" data-preview="/assets/audio/Wink-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured closer for the opening set." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Wink" data-role="Featured" data-preview="/assets/audio/Wink-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured closer for the opening set." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Wink" />
                   <span class="beat-open-chip">Listen</span>
@@ -457,7 +486,7 @@
 
           <div class="beat-grid">
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Tella" data-role="Supporting" data-preview="/assets/audio/Tella-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Tella" data-role="Supporting" data-preview="/assets/audio/Tella-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Tella" />
                   <span class="beat-open-chip">Listen</span>
@@ -471,7 +500,7 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Intake" data-role="Supporting" data-preview="/assets/audio/Intake-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Intake" data-role="Supporting" data-preview="/assets/audio/Intake-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Intake" />
                   <span class="beat-open-chip">Listen</span>
@@ -485,7 +514,7 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Buy Me Flours" data-role="Supporting" data-preview="/assets/audio/Buy-Me-Flours-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Buy Me Flours" data-role="Supporting" data-preview="/assets/audio/Buy-Me-Flours-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Buy Me Flours" />
                   <span class="beat-open-chip">Listen</span>
@@ -499,7 +528,7 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Simulation" data-role="Supporting" data-preview="/assets/audio/Simulation-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Simulation" data-role="Supporting" data-preview="/assets/audio/Simulation-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Simulation" />
                   <span class="beat-open-chip">Listen</span>
@@ -513,7 +542,7 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Sour Patch (TDs)" data-role="Supporting" data-preview="/assets/audio/Sour-Patch-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Sour Patch (TDs)" data-role="Supporting" data-preview="/assets/audio/Sour-Patch-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Sour Patch (TDs)" />
                   <span class="beat-open-chip">Listen</span>
@@ -527,7 +556,7 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Brarie" data-role="Supporting" data-preview="/assets/audio/Brarie-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only.">
+              <button class="beat-trigger" type="button" data-title="Brarie" data-role="Supporting" data-preview="/assets/audio/Brarie-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Brarie" />
                   <span class="beat-open-chip">Listen</span>
@@ -553,7 +582,7 @@
 
           <div class="beat-grid">
             <article class="beat-card free">
-              <button class="beat-trigger" type="button" data-title="Tier 4" data-role="Free" data-preview="/assets/audio/tier-4-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Free entry point in the current collection." data-note="Includes a full free download." data-full="/assets/audio/tier-4-full.mp3">
+              <button class="beat-trigger" type="button" data-title="Tier 4" data-role="Free" data-preview="/assets/audio/tier-4-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Free entry point in the current collection." data-note="Includes a full free download. All rights reserved except where expressly granted." data-full="/assets/audio/tier-4-full.mp3">
                 <div class="beat-thumb-wrap">
                   <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Tier 4" />
                   <span class="beat-open-chip">Listen</span>
@@ -604,8 +633,15 @@
             </audio>
 
             <div class="beat-player-actions">
-              <a id="beat-download-button" class="button button-primary beat-download" href="#" download>Download Free Beat</a>
-              <a class="button button-secondary" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <div class="beat-player-left">
+                <button id="beat-prev-button" class="beat-nav-button" type="button">← Previous</button>
+                <button id="beat-next-button" class="beat-nav-button" type="button">Next →</button>
+              </div>
+
+              <div class="beat-player-right">
+                <a id="beat-download-button" class="button button-primary beat-download" href="#" download>Download Free Beat</a>
+                <a class="button button-secondary" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </div>
             </div>
 
             <p id="beat-modal-note" class="beat-modal-note"></p>
@@ -636,10 +672,14 @@
       const modalDescription = document.getElementById("beat-modal-description");
       const modalNote = document.getElementById("beat-modal-note");
       const closeButton = document.getElementById("beat-modal-close");
+      const prevButton = document.getElementById("beat-prev-button");
+      const nextButton = document.getElementById("beat-next-button");
       const audio = document.getElementById("beat-audio");
       const downloadButton = document.getElementById("beat-download-button");
 
       if (!triggers.length || !modal || !audio) return;
+
+      let currentIndex = -1;
 
       function closeModal() {
         modal.classList.remove("open");
@@ -649,9 +689,15 @@
         audio.load();
         downloadButton.classList.remove("show");
         downloadButton.removeAttribute("href");
+        currentIndex = -1;
       }
 
-      function openModal(trigger) {
+      function renderBeat(index) {
+        const trigger = triggers[index];
+        if (!trigger) return;
+
+        currentIndex = index;
+
         const title = trigger.dataset.title || "";
         const role = trigger.dataset.role || "";
         const preview = trigger.dataset.preview || "";
@@ -679,13 +725,28 @@
           downloadButton.classList.remove("show");
           downloadButton.removeAttribute("href");
         }
+      }
 
+      function openModal(index) {
+        renderBeat(index);
         modal.classList.add("open");
         modal.setAttribute("aria-hidden", "false");
       }
 
-      triggers.forEach((trigger) => {
-        trigger.addEventListener("click", () => openModal(trigger));
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => openModal(index));
+      });
+
+      prevButton.addEventListener("click", () => {
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+        renderBeat(nextIndex);
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex + 1) % triggers.length;
+        renderBeat(nextIndex);
       });
 
       closeButton.addEventListener("click", closeModal);
@@ -695,8 +756,16 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && modal.classList.contains("open")) {
+        if (!modal.classList.contains("open")) return;
+
+        if (event.key === "Escape") {
           closeModal();
+        } else if (event.key === "ArrowLeft") {
+          const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+          renderBeat(nextIndex);
+        } else if (event.key === "ArrowRight") {
+          const nextIndex = (currentIndex + 1) % triggers.length;
+          renderBeat(nextIndex);
         }
       });
     })();
