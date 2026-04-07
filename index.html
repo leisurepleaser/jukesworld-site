@@ -9,6 +9,42 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .promo-card {
+      display: grid;
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .promo-card-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .promo-copy h3 {
+      margin-bottom: 12px;
+    }
+
+    .promo-copy p {
+      margin-bottom: 16px;
+    }
+
+    .promo-badges {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 760px) {
+      .promo-card {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -111,16 +147,40 @@
 
         <div class="feature-grid">
           <article class="feature-card">
-            <span class="kicker">Featured Music</span>
-            <h3>Latest release / current push</h3>
-            <p>Keep one main music focus above the fold when needed: a single release, beat pack, video, or campaign you want people to act on right now.</p>
-            <div class="placeholder-media">Embedded player or release artwork placeholder</div>
+            <span class="kicker">Recently Added</span>
+            <div class="promo-card">
+              <img
+                class="promo-card-image"
+                src="/assets/images/Jukes-World-Thumbnail.png"
+                alt="Jukes World thumbnail artwork for the latest beat collection"
+              />
+
+              <div class="promo-copy">
+                <h3>New beat collection live now</h3>
+                <p>
+                  The latest Jukes collection is up now with featured cuts, supporting paid beats,
+                  and Tier 4 as the current free full download.
+                </p>
+
+                <div class="badge-row promo-badges">
+                  <span class="badge">11-track rollout</span>
+                  <span class="badge">Featured + supporting</span>
+                  <span class="badge">Free Tier 4 beat</span>
+                </div>
+
+                <div class="inline-actions">
+                  <a class="button button-music" href="/music/#beats">Hear the Collection</a>
+                </div>
+              </div>
+            </div>
           </article>
 
           <article class="feature-card">
             <span class="kicker">Featured Art</span>
             <h3>Selected work / current collection</h3>
-            <p>Use one visual story at a time so the homepage feels intentional. This is where you place the strongest featured artwork or current collection preview.</p>
+            <p>
+              Use one visual story at a time so the homepage feels intentional. This is where you place the strongest featured artwork or current collection preview.
+            </p>
             <div class="placeholder-media">Gallery teaser or featured artwork placeholder</div>
           </article>
         </div>
@@ -216,6 +276,26 @@
     </div>
   </footer>
 
-  <script src="/script.js"></script>
+  <script>
+    const menuToggle = document.querySelector("[data-menu-toggle]");
+    const nav = document.querySelector("[data-nav]");
+    const demoForm = document.querySelector("[data-demo-form]");
+    const formOutput = document.querySelector("[data-form-output]");
+
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", () => {
+        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("open");
+      });
+    }
+
+    if (demoForm && formOutput) {
+      demoForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        formOutput.textContent = "Connect your real email platform when ready.";
+      });
+    }
+  </script>
 </body>
 </html>
