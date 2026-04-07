@@ -3,14 +3,369 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jukes World — About</title>
-  <meta name="description" content="About Jukes World and the shared identity connecting its music and art branches." />
+  <title>Jukes World — Music</title>
+  <meta name="description" content="Hear the Jukes collection in a cleaner premium listening gallery." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .music-shell {
+      display: grid;
+      gap: 30px;
+    }
+
+    .music-intro {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.18);
+    }
+
+    .music-intro p {
+      max-width: 46rem;
+      margin-bottom: 18px;
+      opacity: 0.86;
+    }
+
+    .music-intro-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .music-subtle-link {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.84;
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+      padding-bottom: 2px;
+    }
+
+    .music-subtle-link:hover {
+      opacity: 1;
+    }
+
+    .beat-group {
+      display: grid;
+      gap: 16px;
+    }
+
+    .beat-group-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .beat-group-head h2 {
+      margin: 0;
+    }
+
+    .beat-group-head p {
+      margin: 0;
+      opacity: 0.72;
+      max-width: 38rem;
+    }
+
+    .beat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .beat-card {
+      width: 100%;
+      max-width: 240px;
+      justify-self: start;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .beat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+    }
+
+    .beat-card.featured {
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .beat-card.free {
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .beat-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      display: block;
+    }
+
+    .beat-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .beat-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .beat-trigger:hover .beat-thumb {
+      transform: scale(1.02);
+    }
+
+    .beat-open-chip {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(9, 9, 12, 0.72);
+      backdrop-filter: blur(10px);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .beat-copy {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .beat-role {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .beat-card.free .beat-role {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .beat-title-row h3 {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .beat-copy p {
+      margin: 0;
+      opacity: 0.74;
+      line-height: 1.45;
+      min-height: 2.8em;
+      font-size: 0.95rem;
+    }
+
+    .beat-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(4, 4, 8, 0.82);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+    }
+
+    .beat-modal.open {
+      display: flex;
+    }
+
+    .beat-modal-panel {
+      width: min(920px, 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 34%),
+        linear-gradient(180deg, rgba(20,20,24,0.96), rgba(10,10,14,0.98));
+      box-shadow: 0 28px 100px rgba(0,0,0,0.42);
+      overflow: hidden;
+    }
+
+    .beat-modal-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    }
+
+    .beat-modal-art-wrap {
+      background: rgba(255,255,255,0.03);
+      min-height: 100%;
+    }
+
+    .beat-modal-art {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .beat-modal-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .beat-modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .beat-modal-top h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .beat-modal-top p {
+      margin: 0;
+      opacity: 0.78;
+      line-height: 1.55;
+      max-width: 38rem;
+    }
+
+    .beat-modal-role {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .beat-modal-role.free {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .beat-player {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .beat-audio {
+      width: 100%;
+    }
+
+    .beat-player-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .beat-player-left,
+    .beat-player-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .beat-nav-button {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: inherit;
+      border-radius: 999px;
+      padding: 11px 14px;
+      font: inherit;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .beat-nav-button:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .beat-download {
+      display: none;
+    }
+
+    .beat-download.show {
+      display: inline-flex;
+    }
+
+    .beat-modal-note {
+      margin: 0;
+      font-size: 0.92rem;
+      opacity: 0.7;
+    }
+
+    .beat-modal-close {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: inherit;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+
+    .beat-modal-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 820px) {
+      .beat-modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .beat-modal-art {
+        min-height: 240px;
+        max-height: 320px;
+      }
+
+      .beat-player-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </head>
-<body class="inner-page">
+<body class="music-page">
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand-lockup" href="/">
@@ -19,7 +374,7 @@
         </div>
         <div class="brand-text">
           <strong>Jukes World</strong>
-          <span>About</span>
+          <span>Music branch</span>
         </div>
       </a>
 
@@ -27,9 +382,9 @@
 
       <nav class="main-nav" aria-label="Primary" data-nav>
         <a href="/">Home</a>
-        <a href="/music/">Music</a>
+        <a class="active" href="/music/">Music</a>
         <a href="/art/">Art</a>
-        <a class="active" href="/about/">About</a>
+        <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
       </nav>
     </div>
@@ -37,74 +392,402 @@
 
   <main>
     <section class="page-hero">
-      <div class="container">
-        <div class="panel">
-          <span class="eyebrow">About</span>
-          <h1>The creative world behind the branches.</h1>
+      <div class="container music-shell">
+        <article class="music-intro">
+          <span class="eyebrow">Current Collection</span>
+          <h1>Browse the collection.</h1>
           <p>
-            This page should explain what ties the music and art together. Keep it focused on identity, perspective, and the kind of experience Jukes World is meant to create.
+            Every beat stays in a clean, consistent grid. When a listener wants to hear something,
+            the beat opens in a dedicated pop-out player so the catalog stays calm, premium, and easy to scan.
           </p>
-        </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="container about-grid">
-        <article class="content-card">
-          <span class="kicker">Brand Story Placeholder</span>
-          <h3>What Jukes World stands for</h3>
-          <p>
-            Replace this with the core brand statement: the story behind the name, the energy of the work, and the emotional thread that connects sound and visuals.
-          </p>
-          <p>
-            This is also where you can establish your tone: grounded, intentional, original, and personal without becoming overly long.
-          </p>
+          <div class="music-intro-actions">
+            <a class="button button-primary" href="/contact/">Work With Jukes</a>
+            <a class="music-subtle-link" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">@jukesmakemoves</a>
+          </div>
         </article>
 
-        <article class="content-card">
-          <span class="kicker">Architecture</span>
-          <h3>One brand, two branches</h3>
-          <ul class="clean-list">
-            <li>Jukes World = parent brand</li>
-            <li>Music = darker, moodier, audio-forward accent</li>
-            <li>Art = cleaner, gallery-forward accent</li>
-            <li>Shared logo, typography, tone, and footer system</li>
-          </ul>
-        </article>
+        <section class="beat-group" aria-labelledby="featured-group-title">
+          <div class="beat-group-head">
+            <div>
+              <span class="small-label">Group 01</span>
+              <h2 id="featured-group-title">Featured</h2>
+            </div>
+            <p>The front window of the current collection.</p>
+          </div>
+
+          <div class="beat-grid">
+            <article class="beat-card featured">
+              <button class="beat-trigger" type="button" data-title="Nara" data-role="Featured" data-preview="/assets/audio/Nara-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured lead from the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Nara" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Featured</span>
+                  <div class="beat-title-row"><h3>Nara</h3></div>
+                  <p>Featured lead from the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card featured">
+              <button class="beat-trigger" type="button" data-title="Flame" data-role="Featured" data-preview="/assets/audio/Flame-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured cut positioned near the front of the rollout." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Flame" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Featured</span>
+                  <div class="beat-title-row"><h3>Flame</h3></div>
+                  <p>Featured cut positioned near the front of the rollout.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card featured">
+              <button class="beat-trigger" type="button" data-title="Boola" data-role="Featured" data-preview="/assets/audio/Boola-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured selection in the opening group." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Boola" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Featured</span>
+                  <div class="beat-title-row"><h3>Boola</h3></div>
+                  <p>Featured selection in the opening group.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card featured">
+              <button class="beat-trigger" type="button" data-title="Wink" data-role="Featured" data-preview="/assets/audio/Wink-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Featured closer for the opening set." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Wink" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Featured</span>
+                  <div class="beat-title-row"><h3>Wink</h3></div>
+                  <p>Featured closer for the opening set.</p>
+                </div>
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section class="beat-group" aria-labelledby="supporting-group-title">
+          <div class="beat-group-head">
+            <div>
+              <span class="small-label">Group 02</span>
+              <h2 id="supporting-group-title">Supporting</h2>
+            </div>
+            <p>Supporting cuts in the current rollout.</p>
+          </div>
+
+          <div class="beat-grid">
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Tella" data-role="Supporting" data-preview="/assets/audio/Tella-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Tella" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Tella</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Intake" data-role="Supporting" data-preview="/assets/audio/Intake-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Intake" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Intake</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Buy Me Flours" data-role="Supporting" data-preview="/assets/audio/Buy-Me-Flours-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Buy Me Flours" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Buy Me Flours</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Simulation" data-role="Supporting" data-preview="/assets/audio/Simulation-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Simulation" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Simulation</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Sour Patch (TDs)" data-role="Supporting" data-preview="/assets/audio/Sour-Patch-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Sour Patch (TDs)" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Sour Patch (TDs)</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+
+            <article class="beat-card">
+              <button class="beat-trigger" type="button" data-title="Brarie" data-role="Supporting" data-preview="/assets/audio/Brarie-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Brarie" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Supporting</span>
+                  <div class="beat-title-row"><h3>Brarie</h3></div>
+                  <p>Supporting cut in the current collection.</p>
+                </div>
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section class="beat-group" aria-labelledby="free-group-title">
+          <div class="beat-group-head">
+            <div>
+              <span class="small-label">Group 03</span>
+              <h2 id="free-group-title">Free</h2>
+            </div>
+            <p>One free beat is available in the collection.</p>
+          </div>
+
+          <div class="beat-grid">
+            <article class="beat-card free">
+              <button class="beat-trigger" type="button" data-title="Tier 4" data-role="Free" data-preview="/assets/audio/tier-4-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Free entry point in the current collection." data-note="Includes a full free download. All rights reserved except where expressly granted." data-full="/assets/audio/tier-4-full.mp3">
+                <div class="beat-thumb-wrap">
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Tier 4" />
+                  <span class="beat-open-chip">Listen</span>
+                </div>
+                <div class="beat-copy">
+                  <span class="beat-role">Free</span>
+                  <div class="beat-title-row"><h3>Tier 4</h3></div>
+                  <p>Free entry point in the current collection.</p>
+                </div>
+              </button>
+            </article>
+          </div>
+        </section>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="brand-lockup">
-         <div class="brand-mark brand-mark-image">
-          <img src="/assets/images/jukesworld-logo.png" alt="Jukes World logo" />
+  <div class="beat-modal" id="beat-modal" aria-hidden="true">
+    <div class="beat-modal-panel" role="dialog" aria-modal="true" aria-labelledby="beat-modal-title">
+      <div class="beat-modal-grid">
+        <div class="beat-modal-art-wrap">
+          <img id="beat-modal-art" class="beat-modal-art" src="" alt="" />
         </div>
-          <div class="brand-text">
-            <strong>Jukes World</strong>
-            <span>About</span>
+
+        <div class="beat-modal-body">
+          <div class="beat-modal-top">
+            <div>
+              <h2 id="beat-modal-title">Selected Beat</h2>
+              <p id="beat-modal-description"></p>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span id="beat-modal-role" class="beat-modal-role">Role</span>
+              <button id="beat-modal-close" class="beat-modal-close" type="button" aria-label="Close beat player">×</button>
+            </div>
+          </div>
+
+          <div class="beat-player">
+            <audio
+              id="beat-audio"
+              class="beat-audio"
+              controls
+              controlsList="nodownload noplaybackrate"
+              disablePictureInPicture
+              preload="none"
+              oncontextmenu="return false;"
+            >
+              Your browser does not support the audio element.
+            </audio>
+
+            <div class="beat-player-actions">
+              <div class="beat-player-left">
+                <button id="beat-prev-button" class="beat-nav-button" type="button">← Previous</button>
+                <button id="beat-next-button" class="beat-nav-button" type="button">Next →</button>
+              </div>
+
+              <div class="beat-player-right">
+                <a id="beat-download-button" class="button button-primary beat-download" href="#" download>Download Free Beat</a>
+                <a class="button button-secondary" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </div>
+            </div>
+
+            <p id="beat-modal-note" class="beat-modal-note"></p>
           </div>
         </div>
-        <p>One identity built to hold both music and art without fragmentation.</p>
-      </div>
-      <div>
-        <h4>Browse</h4>
-        <div class="footer-links">
-          <a href="/">Home</a>
-          <a href="/music/">Music</a>
-          <a href="/art/">Art</a>
-          <a href="/contact/">Contact</a>
-        </div>
-      </div>
-      <div>
-        <h4>Next step</h4>
-        <small>When you define the story and brand language, this page can become the anchor for the entire site.</small>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <script src="/script.js"></script>
+  <script>
+    const menuToggle = document.querySelector("[data-menu-toggle]");
+    const nav = document.querySelector("[data-nav]");
+
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", () => {
+        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!expanded));
+        nav.classList.toggle("open");
+      });
+    }
+
+    (function initBeatModal() {
+      const triggers = Array.from(document.querySelectorAll(".beat-trigger"));
+      const modal = document.getElementById("beat-modal");
+      const modalArt = document.getElementById("beat-modal-art");
+      const modalTitle = document.getElementById("beat-modal-title");
+      const modalRole = document.getElementById("beat-modal-role");
+      const modalDescription = document.getElementById("beat-modal-description");
+      const modalNote = document.getElementById("beat-modal-note");
+      const closeButton = document.getElementById("beat-modal-close");
+      const prevButton = document.getElementById("beat-prev-button");
+      const nextButton = document.getElementById("beat-next-button");
+      const audio = document.getElementById("beat-audio");
+      const downloadButton = document.getElementById("beat-download-button");
+
+      if (!triggers.length || !modal || !audio) return;
+
+      let currentIndex = -1;
+
+      function tryAutoplay() {
+        const playPromise = audio.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch((error) => {
+            console.error("Audio autoplay failed:", error);
+          });
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+        downloadButton.classList.remove("show");
+        downloadButton.removeAttribute("href");
+        currentIndex = -1;
+      }
+
+      function renderBeat(index, autoplay = false) {
+        const trigger = triggers[index];
+        if (!trigger) return;
+
+        currentIndex = index;
+
+        const title = trigger.dataset.title || "";
+        const role = trigger.dataset.role || "";
+        const preview = trigger.dataset.preview || "";
+        const image = trigger.dataset.image || "";
+        const description = trigger.dataset.description || "";
+        const note = trigger.dataset.note || "";
+        const full = trigger.dataset.full || "";
+
+        modalTitle.textContent = title;
+        modalRole.textContent = role;
+        modalRole.classList.toggle("free", role.toLowerCase() === "free");
+        modalDescription.textContent = description;
+        modalNote.textContent = note;
+        modalArt.src = image;
+        modalArt.alt = `${title} artwork`;
+
+        audio.pause();
+        audio.src = preview;
+        audio.load();
+
+        if (full) {
+          downloadButton.href = full;
+          downloadButton.classList.add("show");
+        } else {
+          downloadButton.classList.remove("show");
+          downloadButton.removeAttribute("href");
+        }
+
+        if (autoplay) {
+          const handleCanPlay = () => {
+            tryAutoplay();
+            audio.removeEventListener("canplay", handleCanPlay);
+          };
+          audio.addEventListener("canplay", handleCanPlay);
+        }
+      }
+
+      function openModal(index) {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        renderBeat(index, true);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => openModal(index));
+      });
+
+      prevButton.addEventListener("click", () => {
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+        renderBeat(nextIndex, true);
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex + 1) % triggers.length;
+        renderBeat(nextIndex, true);
+      });
+
+      closeButton.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!modal.classList.contains("open")) return;
+
+        if (event.key === "Escape") {
+          closeModal();
+        } else if (event.key === "ArrowLeft") {
+          if (currentIndex === -1) return;
+          const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+          renderBeat(nextIndex, true);
+        } else if (event.key === "ArrowRight") {
+          if (currentIndex === -1) return;
+          const nextIndex = (currentIndex + 1) % triggers.length;
+          renderBeat(nextIndex, true);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
