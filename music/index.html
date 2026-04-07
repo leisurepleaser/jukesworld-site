@@ -4,77 +4,332 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jukes World — Music</title>
-  <meta name="description" content="Music branch of Jukes World: releases, beats, licensing, credits, and work inquiries." />
+  <meta name="description" content="Hear the recent Jukes collection in a focused single-player catalog." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    .beats-launch-grid {
+    .music-shell {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px;
+    }
+
+    .music-hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .music-hero-panel p {
+      max-width: 45rem;
+      margin-bottom: 18px;
+    }
+
+    .music-hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .music-hero-links .subtle-link {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.86;
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+      padding-bottom: 2px;
+    }
+
+    .music-hero-links .subtle-link:hover {
+      opacity: 1;
+    }
+
+    .catalog-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .catalog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .catalog-filter {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: inherit;
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .catalog-filter.active {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
       gap: 24px;
-      margin-top: 24px;
+      align-items: start;
     }
 
-    .beat-launch-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+    .catalog-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .catalog-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .catalog-item.active {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-1px);
+    }
+
+    .catalog-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
       padding: 16px;
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
     }
 
-    .beat-launch-card img {
+    .catalog-thumb {
+      width: 84px;
+      height: 84px;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .catalog-main {
+      min-width: 0;
+    }
+
+    .catalog-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .catalog-title-row h3 {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .catalog-role {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .catalog-role.free {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .catalog-blurb {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    .catalog-arrow {
+      font-size: 1.3rem;
+      opacity: 0.65;
+    }
+
+    .catalog-detail {
+      display: none;
+      padding: 0 16px 16px 116px;
+      opacity: 0.84;
+    }
+
+    .catalog-item.active .catalog-detail {
+      display: block;
+    }
+
+    .catalog-detail p {
+      margin: 0 0 8px;
+    }
+
+    .catalog-detail small {
+      display: block;
+      opacity: 0.75;
+    }
+
+    .player-panel {
+      position: sticky;
+      top: 108px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .player-art {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 18px;
       display: block;
+      margin-bottom: 16px;
+    }
+
+    .player-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .player-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .player-role {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .player-role.free {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .player-copy {
+      margin: 0 0 16px;
+      opacity: 0.86;
+      line-height: 1.55;
+    }
+
+    .player-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .player-stat {
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .player-stat-label {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .player-stat-value {
+      display: block;
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .main-audio-player {
+      width: 100%;
       margin-bottom: 14px;
     }
 
-    .beat-launch-card h4 {
-      margin: 0 0 8px;
-      font-size: 1.15rem;
-    }
-
-    .beat-launch-meta {
-      display: inline-block;
-      margin-bottom: 12px;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .beat-launch-card audio {
-      width: 100%;
-    }
-
-    .beat-launch-card.featured-track {
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .beat-launch-card.free-track {
-      border-color: rgba(255, 255, 255, 0.28);
-    }
-
-    .beats-note {
-      margin-top: 16px;
-      opacity: 0.82;
-    }
-
-    .free-download-wrap {
+    .player-actions {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
     }
 
-    .free-download-note {
-      margin: 0;
-      opacity: 0.82;
+    .player-note {
+      margin-top: 14px;
       font-size: 0.95rem;
+      opacity: 0.72;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 980px) {
+      .music-hero-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .player-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .catalog-trigger {
+        grid-template-columns: 70px minmax(0, 1fr);
+      }
+
+      .catalog-arrow {
+        display: none;
+      }
+
+      .catalog-thumb {
+        width: 70px;
+        height: 70px;
+      }
+
+      .catalog-detail {
+        padding: 0 16px 16px 16px;
+      }
+
+      .player-stats {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -105,227 +360,109 @@
 
   <main>
     <section class="page-hero">
-      <div class="container">
-        <div class="panel">
-          <span class="eyebrow">Music</span>
-          <h1>Built to be heard.</h1>
-          <p>
-            Preview the current launch selection from Jukes. This page is the main place to hear the beats, get a sense of the sound, and give feedback before the store layer is expanded.
-          </p>
-          <div class="inline-nav">
-            <a href="#releases">Releases</a>
-            <a href="#beats">Beats</a>
-            <a href="#licensing">Licensing</a>
-            <a href="#credits">Credits</a>
-            <a href="#work">Work With Jukes</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="releases">
-      <div class="container">
-        <div class="section-head">
+      <div class="container music-shell">
+        <div class="panel music-hero-panel">
           <div>
-            <span class="small-label">Section 01</span>
-            <h2>Releases</h2>
-          </div>
-        </div>
-        <div class="card-grid">
-          <article class="content-card">
-            <span class="kicker">Current Focus</span>
-            <h3>Launch-stage music branch</h3>
-            <p>This section can later hold singles, projects, streaming links, and release artwork. For now, the main priority is getting the beat previews live and easy to test.</p>
-            <div class="placeholder-media">Release area reserved for future drops</div>
-          </article>
-          <article class="content-card">
-            <span class="kicker">Next Additions</span>
-            <h3>What gets layered in later</h3>
-            <ul class="clean-list">
-              <li>Streaming embeds</li>
-              <li>Official release archive</li>
-              <li>Credits and placements</li>
-              <li>Store and licensing portal</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+            <span class="eyebrow">Collection</span>
+            <h1>Browse the catalog. Open one track at a time.</h1>
+            <p>
+              The catalog stays visible as a whole, but listening now runs through one shared player.
+              That keeps the page cleaner, prevents accidental overlap, and avoids loading a separate player in every card.
+            </p>
 
-    <section id="beats">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="small-label">Section 02</span>
-            <h2>Beats</h2>
-          </div>
-        </div>
-
-        <div class="beats-launch-grid">
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Nara" />
-            <h4>Nara</h4>
-            <span class="beat-launch-meta">Featured</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Nara-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Flame" />
-            <h4>Flame</h4>
-            <span class="beat-launch-meta">Featured</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Flame-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Boola" />
-            <h4>Boola</h4>
-            <span class="beat-launch-meta">Featured</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Boola-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Wink" />
-            <h4>Wink</h4>
-            <span class="beat-launch-meta">Featured</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Wink-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tella" />
-            <h4>Tella</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Tella-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Intake" />
-            <h4>Intake</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Intake-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Buy Me Flours" />
-            <h4>Buy Me Flours</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Buy-Me-Flours-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Simulation" />
-            <h4>Simulation</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Simulation-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Sour Patch (TDs)" />
-            <h4>Sour Patch (TDs)</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Sour-Patch-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Brarie" />
-            <h4>Brarie</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/Brarie-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </article>
-
-          <article class="beat-launch-card free-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tier 4" />
-            <h4>Tier 4</h4>
-            <span class="beat-launch-meta">Free</span>
-            <audio controls controlsList="nodownload noplaybackrate" disablePictureInPicture preload="metadata" oncontextmenu="return false;">
-              <source src="/assets/audio/tier-4-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-
-            <div class="free-download-wrap">
-              <a class="button button-primary" href="/assets/audio/tier-4-full.mp3" download>Download Free Beat</a>
-              <p class="free-download-note">Full free download for Tier 4.</p>
+            <div class="music-hero-links">
+              <a class="button button-primary" href="#catalog">Open the Catalog</a>
+              <a class="button button-secondary" href="/contact/">Work With Jukes</a>
+              <a class="subtle-link" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">@jukesmakemoves</a>
             </div>
-          </article>
+          </div>
         </div>
 
-        <p class="beats-note">Current order: featured first, then supporting paid, with Tier 4 as the final free preview and current free full download.</p>
-      </div>
-    </section>
+        <section id="catalog">
+          <div class="catalog-toolbar">
+            <div>
+              <span class="small-label">Current Collection</span>
+              <h2 style="margin: 6px 0 0;">11-track catalog</h2>
+            </div>
 
-    <section id="licensing">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 03</span>
-          <h3>Licensing</h3>
-          <p>Make licensing easy to understand. Separate casual browsing from business intent with simple categories and strong next steps.</p>
-          <div class="badge-row">
-            <span class="badge">Personal use</span>
-            <span class="badge">Commercial use</span>
-            <span class="badge">Exclusive buyout</span>
+            <div class="catalog-filters" aria-label="Catalog filters">
+              <button class="catalog-filter active" type="button" data-filter="all">All</button>
+              <button class="catalog-filter" type="button" data-filter="featured">Featured</button>
+              <button class="catalog-filter" type="button" data-filter="supporting">Supporting</button>
+              <button class="catalog-filter" type="button" data-filter="free">Free</button>
+            </div>
           </div>
-        </article>
-        <article class="content-card">
-          <span class="kicker">What to include</span>
-          <ul class="clean-list">
-            <li>License type breakdowns</li>
-            <li>Usage rights and limitations</li>
-            <li>How stems are handled</li>
-            <li>Contact path for custom sync or business deals</li>
-          </ul>
-        </article>
-      </div>
-    </section>
 
-    <section id="credits">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 04</span>
-          <h3>Credits</h3>
-          <p>This is where you prove range and legitimacy. Add placements, production credits, collaborators, and notable contributions as they grow.</p>
-          <ul class="clean-list">
-            <li>Artist / project credit placeholder</li>
-            <li>Artist / project credit placeholder</li>
-            <li>Artist / project credit placeholder</li>
-          </ul>
-        </article>
-        <article class="content-card" id="work">
-          <span class="kicker">Section 05</span>
-          <h3>Work With Jukes</h3>
-          <p>Use one direct CTA for collaborations, production inquiries, custom work, or soundtrack placement. Keep the ask simple and professional.</p>
-          <div class="inline-actions">
-            <a class="button button-music" href="/contact/">Start an Inquiry</a>
+          <div class="catalog-layout">
+            <div class="catalog-list" id="catalog-list"></div>
+
+            <aside class="player-panel" aria-live="polite">
+              <img
+                id="player-art"
+                class="player-art"
+                src="/assets/images/Jukes-World-Thumbnail.png"
+                alt="Selected track artwork"
+              />
+
+              <div class="player-header">
+                <h2 id="player-title">Nara</h2>
+                <span id="player-role" class="player-role">Featured Paid</span>
+              </div>
+
+              <p id="player-copy" class="player-copy">
+                Featured lead from the current collection.
+              </p>
+
+              <div class="player-stats">
+                <div class="player-stat">
+                  <span class="player-stat-label">Duration</span>
+                  <span id="player-duration" class="player-stat-value">—</span>
+                </div>
+                <div class="player-stat">
+                  <span class="player-stat-label">Availability</span>
+                  <span id="player-availability" class="player-stat-value">Preview stream</span>
+                </div>
+              </div>
+
+              <audio
+                id="main-audio-player"
+                class="main-audio-player"
+                controls
+                controlsList="nodownload noplaybackrate"
+                disablePictureInPicture
+                preload="metadata"
+                oncontextmenu="return false;"
+              >
+                <source id="main-audio-source" src="/assets/audio/Nara-preview.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+
+              <div class="player-actions">
+                <a
+                  id="download-button"
+                  class="button button-primary hidden"
+                  href="/assets/audio/tier-4-full.mp3"
+                  download
+                >
+                  Download Free Beat
+                </a>
+
+                <a
+                  class="button button-secondary"
+                  href="https://www.instagram.com/jukesmakemoves/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Follow on Instagram
+                </a>
+              </div>
+
+              <p class="player-note">
+                Preview streams are hidden from the obvious browser download control. Tier 4 stays available as the current free full download.
+              </p>
+            </aside>
           </div>
-        </article>
+        </section>
       </div>
     </section>
   </main>
@@ -342,7 +479,7 @@
             <span>Music branch</span>
           </div>
         </div>
-        <p>Focused on releases, beats, licensing, and collaboration.</p>
+        <p>Focused on beats, listening, and licensing.</p>
       </div>
 
       <div>
@@ -356,23 +493,119 @@
       </div>
 
       <div>
-        <h4>Need later</h4>
-        <small>Add streaming embeds, beat store tools, placements, and formal licensing details when ready.</small>
+        <h4>Follow</h4>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    const menuToggle = document.querySelector("[data-menu-toggle]");
-    const nav = document.querySelector("[data-nav]");
-
-    if (menuToggle && nav) {
-      menuToggle.addEventListener("click", () => {
-        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-        menuToggle.setAttribute("aria-expanded", String(!expanded));
-        nav.classList.toggle("open");
-      });
-    }
+  <script id="track-data" type="application/json">
+    [
+      {
+        "title": "Nara",
+        "roleFilter": "featured",
+        "roleLabel": "Featured Paid",
+        "preview": "/assets/audio/Nara-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Featured lead from the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Flame",
+        "roleFilter": "featured",
+        "roleLabel": "Featured Paid",
+        "preview": "/assets/audio/Flame-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Featured cut positioned near the front of the rollout.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Boola",
+        "roleFilter": "featured",
+        "roleLabel": "Featured Paid",
+        "preview": "/assets/audio/Boola-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Featured selection in the opening group.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Wink",
+        "roleFilter": "featured",
+        "roleLabel": "Featured Paid",
+        "preview": "/assets/audio/Wink-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Featured closer for the front section of the catalog.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Tella",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Tella-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Intake",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Intake-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Buy Me Flours",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Buy-Me-Flours-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Simulation",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Simulation-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Sour Patch (TDs)",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Sour-Patch-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Brarie",
+        "roleFilter": "supporting",
+        "roleLabel": "Supporting Paid",
+        "preview": "/assets/audio/Brarie-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Supporting paid preview in the current collection.",
+        "availability": "Paid beat preview"
+      },
+      {
+        "title": "Tier 4",
+        "roleFilter": "free",
+        "roleLabel": "Free",
+        "preview": "/assets/audio/tier-4-preview.mp3",
+        "image": "/assets/images/Jukes-World-Thumbnail.png",
+        "blurb": "Free entry point for the current rollout.",
+        "availability": "Free full download",
+        "fullDownload": "/assets/audio/tier-4-full.mp3"
+      }
+    ]
   </script>
+
+  <script src="/script.js"></script>
 </body>
 </html>
