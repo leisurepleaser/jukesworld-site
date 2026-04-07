@@ -9,6 +9,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .beats-launch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .beat-launch-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .beat-launch-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .beat-launch-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .beat-launch-meta {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .beat-launch-card audio {
+      width: 100%;
+    }
+
+    .beat-launch-card.featured-track {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .beat-launch-card.free-track {
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .beats-note {
+      margin-top: 16px;
+      opacity: 0.82;
+    }
+  </style>
 </head>
 <body class="music-page">
   <header class="site-header">
@@ -42,7 +97,7 @@
           <span class="eyebrow">Music</span>
           <h1>Built to be heard.</h1>
           <p>
-            This branch is where listeners, collaborators, supervisors, and clients land. Keep the structure focused: releases, beats, licensing, credits, and a clear path to work with Jukes.
+            Preview the current launch selection from Jukes. This page is the main place to hear the beats, get a sense of the sound, and give feedback before the store layer is expanded.
           </p>
           <div class="inline-nav">
             <a href="#releases">Releases</a>
@@ -65,19 +120,19 @@
         </div>
         <div class="card-grid">
           <article class="content-card">
-            <span class="kicker">Featured Release</span>
-            <h3>Current single / project placeholder</h3>
-            <p>Use one primary release block with cover art, short copy, and streaming links. This should be the main thing casual visitors see first.</p>
-            <div class="placeholder-media">Streaming embed / artwork placeholder</div>
+            <span class="kicker">Current Focus</span>
+            <h3>Launch-stage music branch</h3>
+            <p>This section can later hold singles, projects, streaming links, and release artwork. For now, the main priority is getting the beat previews live and easy to test.</p>
+            <div class="placeholder-media">Release area reserved for future drops</div>
           </article>
           <article class="content-card">
-            <span class="kicker">Release Archive</span>
-            <h3>Past work and catalog</h3>
-            <p>Use this area for earlier releases, grouped by singles, EPs, albums, or eras. Keep it clean so the branch feels curated rather than cluttered.</p>
+            <span class="kicker">Next Additions</span>
+            <h3>What gets layered in later</h3>
             <ul class="clean-list">
-              <li>Release tile placeholder</li>
-              <li>Release tile placeholder</li>
-              <li>Release tile placeholder</li>
+              <li>Streaming embeds</li>
+              <li>Official release archive</li>
+              <li>Credits and placements</li>
+              <li>Store and licensing portal</li>
             </ul>
           </article>
         </div>
@@ -85,29 +140,127 @@
     </section>
 
     <section id="beats">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 02</span>
-          <h3>Beats</h3>
-          <p>Position beats as a clear offering. List styles, moods, pricing tiers, or whether they are exclusive, non-exclusive, or custom.</p>
-          <div class="track-preview-card">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="small-label">Section 02</span>
+            <h2>Beats</h2>
+          </div>
+        </div>
+
+        <div class="beats-launch-grid">
+          <article class="beat-launch-card featured-track">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Nara" />
+            <h4>Nara</h4>
+            <span class="beat-launch-meta">Featured</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Nara-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card featured-track">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Flame" />
+            <h4>Flame</h4>
+            <span class="beat-launch-meta">Featured</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Flame-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card featured-track">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Boola" />
+            <h4>Boola</h4>
+            <span class="beat-launch-meta">Featured</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Boola-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card featured-track">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Wink" />
+            <h4>Wink</h4>
+            <span class="beat-launch-meta">Featured</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Wink-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tella" />
+            <h4>Tella</h4>
+            <span class="beat-launch-meta">Supporting Paid</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Tella-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Intake" />
+            <h4>Intake</h4>
+            <span class="beat-launch-meta">Supporting Paid</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Intake-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Buy Me Flours" />
+            <h4>Buy Me Flours</h4>
+            <span class="beat-launch-meta">Supporting Paid</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Buy-Me-Flours-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Simulation" />
+            <h4>Simulation</h4>
+            <span class="beat-launch-meta">Supporting Paid</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Simulation-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Sour Patch (TDs)" />
+            <h4>Sour Patch (TDs)</h4>
+            <span class="beat-launch-meta">Supporting Paid</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/Sour-Patch-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+
+          <article class="beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Brarie" />
             <h4>Brarie</h4>
-            <p>Preview snippet</p>
+            <span class="beat-launch-meta">Supporting Paid</span>
             <audio controls preload="metadata">
               <source src="/assets/audio/Brarie-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
-          </div>
-        </article>
-        <article class="content-card">
-          <span class="kicker">Suggested buckets</span>
-          <ul class="clean-list">
-            <li>Beat packs or featured instrumentals</li>
-            <li>Custom production inquiry path</li>
-            <li>Short FAQ on turnaround and revisions</li>
-            <li>Links to store or licensing portal</li>
-          </ul>
-        </article>
+          </article>
+
+          <article class="beat-launch-card free-track">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tier 4" />
+            <h4>Tier 4</h4>
+            <span class="beat-launch-meta">Free</span>
+            <audio controls preload="metadata">
+              <source src="/assets/audio/tier-4-preview.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+        </div>
+
+        <p class="beats-note">Current order: featured first, then supporting paid, with Tier 4 as the final free preview.</p>
       </div>
     </section>
 
