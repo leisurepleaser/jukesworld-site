@@ -12,55 +12,54 @@
   <style>
     .beats-launch-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 24px;
-      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      width: 100%;
     }
-
     .beat-launch-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-
     .beat-launch-card img {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 14px;
       display: block;
-      margin-bottom: 14px;
     }
-
-    .beat-launch-card h4 {
-      margin: 0 0 8px;
-      font-size: 1.15rem;
-    }
-
-    .beat-launch-meta {
-      display: inline-block;
-      margin-bottom: 12px;
+    .beat-launch-role {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 6px 10px;
+      border-radius: 999px;
       font-size: 0.78rem;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      opacity: 0.8;
+      background: rgba(255,255,255,0.08);
     }
-
+    .beat-launch-role.free {
+      background: rgba(255,255,255,0.14);
+    }
+    .beat-launch-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .beat-launch-card h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .beat-launch-card p {
+      margin: 0;
+    }
     .beat-launch-card audio {
       width: 100%;
     }
-
-    .beat-launch-card.featured-track {
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .beat-launch-card.free-track {
-      border-color: rgba(255, 255, 255, 0.28);
-    }
-
-    .beats-note {
-      margin-top: 16px;
+    .beats-launch-note {
+      margin-top: 20px;
       opacity: 0.82;
     }
   </style>
@@ -97,7 +96,7 @@
           <span class="eyebrow">Music</span>
           <h1>Built to be heard.</h1>
           <p>
-            Preview the current launch selection from Jukes. This page is the main place to hear the beats, get a sense of the sound, and give feedback before the store layer is expanded.
+            This branch is where listeners, collaborators, supervisors, and clients land. Keep the structure focused: releases, beats, licensing, credits, and a clear path to work with Jukes.
           </p>
           <div class="inline-nav">
             <a href="#releases">Releases</a>
@@ -120,19 +119,19 @@
         </div>
         <div class="card-grid">
           <article class="content-card">
-            <span class="kicker">Current Focus</span>
-            <h3>Launch-stage music branch</h3>
-            <p>This section can later hold singles, projects, streaming links, and release artwork. For now, the main priority is getting the beat previews live and easy to test.</p>
-            <div class="placeholder-media">Release area reserved for future drops</div>
+            <span class="kicker">Featured Release</span>
+            <h3>Current single / project placeholder</h3>
+            <p>Use one primary release block with cover art, short copy, and streaming links. This should be the main thing casual visitors see first.</p>
+            <div class="placeholder-media">Streaming embed / artwork placeholder</div>
           </article>
           <article class="content-card">
-            <span class="kicker">Next Additions</span>
-            <h3>What gets layered in later</h3>
+            <span class="kicker">Release Archive</span>
+            <h3>Past work and catalog</h3>
+            <p>Use this area for earlier releases, grouped by singles, EPs, albums, or eras. Keep it clean so the branch feels curated rather than cluttered.</p>
             <ul class="clean-list">
-              <li>Streaming embeds</li>
-              <li>Official release archive</li>
-              <li>Credits and placements</li>
-              <li>Store and licensing portal</li>
+              <li>Release tile placeholder</li>
+              <li>Release tile placeholder</li>
+              <li>Release tile placeholder</li>
             </ul>
           </article>
         </div>
@@ -149,110 +148,132 @@
         </div>
 
         <div class="beats-launch-grid">
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Nara" />
-            <h4>Nara</h4>
-            <span class="beat-launch-meta">Featured</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Nara" />
+            <div class="beat-launch-meta">
+              <h4>Nara</h4>
+              <span class="beat-launch-role">Featured Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Nara-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Flame" />
-            <h4>Flame</h4>
-            <span class="beat-launch-meta">Featured</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Flame" />
+            <div class="beat-launch-meta">
+              <h4>Flame</h4>
+              <span class="beat-launch-role">Featured Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Flame-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Boola" />
-            <h4>Boola</h4>
-            <span class="beat-launch-meta">Featured</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Boola" />
+            <div class="beat-launch-meta">
+              <h4>Boola</h4>
+              <span class="beat-launch-role">Featured Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Boola-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card featured-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Wink" />
-            <h4>Wink</h4>
-            <span class="beat-launch-meta">Featured</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Wink" />
+            <div class="beat-launch-meta">
+              <h4>Wink</h4>
+              <span class="beat-launch-role">Featured Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Wink-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tella" />
-            <h4>Tella</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Tella" />
+            <div class="beat-launch-meta">
+              <h4>Tella</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Tella-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Intake" />
-            <h4>Intake</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Intake" />
+            <div class="beat-launch-meta">
+              <h4>Intake</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Intake-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Buy Me Flours" />
-            <h4>Buy Me Flours</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Buy Me Flours" />
+            <div class="beat-launch-meta">
+              <h4>Buy Me Flours</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Buy-Me-Flours-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Simulation" />
-            <h4>Simulation</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Simulation" />
+            <div class="beat-launch-meta">
+              <h4>Simulation</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Simulation-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Sour Patch (TDs)" />
-            <h4>Sour Patch (TDs)</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Sour Patch (TDs)" />
+            <div class="beat-launch-meta">
+              <h4>Sour Patch (TDs)</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Sour-Patch-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Brarie" />
-            <h4>Brarie</h4>
-            <span class="beat-launch-meta">Supporting Paid</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Brarie" />
+            <div class="beat-launch-meta">
+              <h4>Brarie</h4>
+              <span class="beat-launch-role">Supporting Paid</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/Brarie-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </article>
 
-          <article class="beat-launch-card free-track">
-            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes artwork for Tier 4" />
-            <h4>Tier 4</h4>
-            <span class="beat-launch-meta">Free</span>
+          <article class="content-card beat-launch-card">
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork for Tier 4" />
+            <div class="beat-launch-meta">
+              <h4>Tier 4</h4>
+              <span class="beat-launch-role free">Free</span>
+            </div>
             <audio controls preload="metadata">
               <source src="/assets/audio/tier-4-preview.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
@@ -260,7 +281,7 @@
           </article>
         </div>
 
-        <p class="beats-note">Current order: featured first, then supporting paid, with Tier 4 as the final free preview.</p>
+        <p class="beats-launch-note">Launch order: Nara, Flame, Boola, Wink, Tella, Intake, Buy Me Flours, Simulation, Sour Patch (TDs), Brarie, Tier 4.</p>
       </div>
     </section>
 
