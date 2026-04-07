@@ -4,11 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jukes World — Art</title>
-  <meta name="description" content="Art branch of Jukes World: gallery, projects, prints, commissions, and process." />
+  <meta name="description" content="A gallery view of artwork from Jukes World." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .gallery-shell {
+      display: grid;
+      gap: 26px;
+    }
+
+    .gallery-hero {
+      border-radius: 24px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .gallery-hero p {
+      max-width: 40rem;
+      margin-bottom: 0;
+      opacity: 0.85;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-piece {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .gallery-piece button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      display: block;
+    }
+
+    .gallery-piece img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-piece figcaption {
+      padding: 14px 16px 18px;
+    }
+
+    .gallery-piece h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
+
+    .gallery-piece p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body class="art-page">
   <header class="site-header">
@@ -37,127 +110,86 @@
 
   <main>
     <section class="page-hero">
-      <div class="container">
-        <div class="panel">
-          <span class="eyebrow">Art</span>
-          <h1>Built to be seen.</h1>
+      <div class="container gallery-shell">
+        <div class="gallery-hero">
+          <span class="eyebrow">Gallery</span>
+          <h1>Artwork from Jukes World.</h1>
           <p>
-            This branch is designed as the gallery-forward side of the brand. Keep it visual, spacious, and intentional so the work leads and the interface stays out of the way.
+            The art page is being kept simple for now: just a clean gallery presentation while the music side gets the main push.
           </p>
-          <div class="inline-nav">
-            <a href="#gallery">Gallery</a>
-            <a href="#projects">Projects</a>
-            <a href="#prints">Prints</a>
-            <a href="#commissions">Commissions</a>
-            <a href="#process">Process</a>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <section id="gallery">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="small-label">Section 01</span>
-            <h2>Gallery</h2>
+        <section aria-label="Art gallery">
+          <div class="gallery-grid">
+            <figure class="gallery-piece">
+              <button
+                type="button"
+                data-lightbox-image="/assets/images/tennis-serve-process.png"
+                data-lightbox-alt="Digital tennis illustration showing a player mid-serve"
+              >
+                <img
+                  src="/assets/images/tennis-serve-process.png"
+                  alt="Digital tennis illustration showing a player mid-serve"
+                />
+                <figcaption>
+                  <h3>Tennis Serve Study</h3>
+                  <p>Motion, gesture, and atmosphere.</p>
+                </figcaption>
+              </button>
+            </figure>
+
+            <figure class="gallery-piece">
+              <button
+                type="button"
+                data-lightbox-image="/assets/images/smh-collage.png"
+                data-lightbox-alt="Digital collage illustration featuring anime-inspired characters"
+              >
+                <img
+                  src="/assets/images/smh-collage.png"
+                  alt="Digital collage illustration featuring anime-inspired characters"
+                />
+                <figcaption>
+                  <h3>SMH Collage</h3>
+                  <p>Layered character collage.</p>
+                </figcaption>
+              </button>
+            </figure>
+
+            <figure class="gallery-piece">
+              <button
+                type="button"
+                data-lightbox-image="/assets/images/gordon-digital.png"
+                data-lightbox-alt="Digital illustration portrait of a chef"
+              >
+                <img
+                  src="/assets/images/gordon-digital.png"
+                  alt="Digital illustration portrait of a chef"
+                />
+                <figcaption>
+                  <h3>Chef Portrait Study</h3>
+                  <p>Character-driven expression piece.</p>
+                </figcaption>
+              </button>
+            </figure>
+
+            <figure class="gallery-piece">
+              <button
+                type="button"
+                data-lightbox-image="/assets/images/boyinwater.png"
+                data-lightbox-alt="Digital illustration of a boy in water between wooden posts"
+              >
+                <img
+                  src="/assets/images/boyinwater.png"
+                  alt="Digital illustration of a boy in water between wooden posts"
+                />
+                <figcaption>
+                  <h3>Boy in Water</h3>
+                  <p>Quiet tension and environmental mood.</p>
+                </figcaption>
+              </button>
+            </figure>
           </div>
-        </div>
-        <div class="gallery-grid">
-          <article class="content-card">
-            <h3>Featured work placeholder</h3>
-            <div class="placeholder-media">Artwork placeholder</div>
-          </article>
-          <article class="content-card">
-            <h3>Featured work placeholder</h3>
-            <div class="placeholder-media">Artwork placeholder</div>
-          </article>
-          <article class="content-card">
-            <h3>Featured work placeholder</h3>
-            <div class="placeholder-media">Artwork placeholder</div>
-          </article>
-          <article class="content-card">
-            <h3>Featured work placeholder</h3>
-            <div class="placeholder-media">Artwork placeholder</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container card-grid">
-       <article class="content-card">
-  <span class="kicker">Section 02</span>
-  <h3>Projects</h3>
-  <p>Grouped digital illustrations presented as a curated body of work. Prints for these pieces will be available in the future.</p>
-
-  <div class="project-series">
-    <span class="kicker">Digital Illustrations</span>
-    <div class="project-gallery-grid">
-      <figure class="project-piece">
-        <img
-          src="/assets/images/smh-collage.png"
-          alt="Digital collage illustration featuring anime-inspired characters"
-        />
-        <figcaption>SMH Collage</figcaption>
-      </figure>
-
-      <figure class="project-piece">
-        <img
-          src="/assets/images/gordon-digital.png"
-          alt="Digital illustration portrait of a chef"
-        />
-        <figcaption>Chef Portrait Study</figcaption>
-      </figure>
-
-      <figure class="project-piece">
-        <img
-          src="/assets/images/boy-in-water.png"
-          alt="Digital illustration of a boy in water between wooden posts"
-        />
-        <figcaption>Boy in Water</figcaption>
-      </figure>
-    </div>
-  </div>
-</article>
-        <article class="content-card">
-          <span class="kicker">Section 03</span>
-          <h3>Prints</h3>
-          <p>These digital illustrations will be available as prints in the future. This area will later hold edition details, sizes, shipping notes, and purchase information.</p>
-          <div class="placeholder-media">Future print release details</div>
-        </article>
-      </div>
-    </section>
-
-    <section id="commissions">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 04</span>
-          <h3>Commissions</h3>
-          <p>Set expectations clearly. State what kinds of commissions you take, what you do not take, and what the general process looks like.</p>
-          <div class="badge-row">
-            <span class="badge">Availability placeholder</span>
-            <span class="badge">Timeline placeholder</span>
-            <span class="badge">Starting price placeholder</span>
-          </div>
-        </article>
-        <article class="content-card" id="process">
-          <span class="kicker">Section 05</span>
-          <h3>Process / Sketchbook</h3>
-          <div class="art-process-piece">
-            <img
-              src="/assets/images/tennis-serve-process.png"
-              alt="Digital tennis illustration showing a player mid-serve"
-            />
-            <div class="art-process-copy">
-              <h4>Tennis Serve Study</h4>
-              <p>Digital illustration exploring gesture, movement, and atmosphere.</p>
-            </div>
-          </div>
-          <div class="inline-actions">
-            <a class="button button-art" href="/contact/">Ask About a Commission</a>
-          </div>
-        </article>
+        </section>
       </div>
     </section>
   </main>
@@ -174,8 +206,9 @@
             <span>Art branch</span>
           </div>
         </div>
-        <p>Focused on gallery presentation, projects, prints, and commissions.</p>
+        <p>Gallery mode for now.</p>
       </div>
+
       <div>
         <h4>Browse</h4>
         <div class="footer-links">
@@ -185,9 +218,10 @@
           <a href="/contact/">Contact</a>
         </div>
       </div>
+
       <div>
-        <h4>Need later</h4>
-        <small>Add real artwork, collection titles, print specs, pricing, and commission policy when ready.</small>
+        <h4>Status</h4>
+        <small>More collections and print layers can come later without changing the gallery base.</small>
       </div>
     </div>
   </footer>
