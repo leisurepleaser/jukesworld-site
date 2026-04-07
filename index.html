@@ -1,221 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jukes World — Music & Art</title>
-  <meta name="description" content="Jukes World is one creative brand with two branches: Music and Art." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jukes</title>
+  <style>
+    :root {
+      --bg: #111514;
+      --panel: rgba(255,255,255,0.045);
+      --panel-strong: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.1);
+      --text: #f0ece4;
+      --muted: rgba(240,236,228,0.72);
+      --accent: #b48b6a;
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Garamond, Georgia, serif;
+      background:
+        radial-gradient(circle at top, rgba(180,139,106,0.1), transparent 30%),
+        linear-gradient(180deg, #161918 0%, #101212 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(16, 18, 18, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .site-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      letter-spacing: 0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 64px 0 44px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(28px, 5vw, 48px);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: 0.95;
+      font-weight: 500;
+    }
+
+    .hero p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.55;
+      max-width: 34rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 1rem;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .button.primary {
+      background: rgba(180,139,106,0.18);
+      border-color: rgba(180,139,106,0.34);
+    }
+
+    .hero-art {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-art img {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .section {
+      padding: 12px 0 56px;
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 500;
+    }
+
+    .section-subtext {
+      margin-top: 10px;
+      color: var(--muted);
+      max-width: 42rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .beats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .beat-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .beat-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .beat-card-body {
+      padding: 16px;
+    }
+
+    .beat-role {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .beat-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .callout {
+      margin-top: 26px;
+      background: rgba(180,139,106,0.11);
+      border: 1px solid rgba(180,139,106,0.24);
+      border-radius: 22px;
+      padding: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .callout strong {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .beats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .beats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .hero-copy,
+      .hero-art {
+        border-radius: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand-lockup" href="/">
-        <div class="brand-mark brand-mark-image">
-          <img src="/assets/images/jukesworld-logo.png" alt="Jukes World logo" />
-        </div>
-        <div class="brand-text">
-          <strong>Jukes World</strong>
-          <span>Music + Art</span>
-        </div>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>Menu</button>
-
-      <nav class="main-nav" aria-label="Primary" data-nav>
-        <a class="active" href="/">Home</a>
-        <a href="/music/">Music</a>
-        <a href="/art/">Art</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
+    <div class="container site-header-inner">
+      <a class="brand" href="index.html">Jukes</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="beats.html">Beats</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
+    <section class="container hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Original Instrumentals</div>
+        <h1>Beats by Jukes</h1>
+        <p>
+          A focused first release of original beat previews. Start with the featured records below,
+          then move into the full listening page.
+        </p>
+        <div class="cta-row">
+          <a class="button primary" href="beats.html">Browse All 11 Tracks</a>
+          <a class="button" href="beats.html#free-beat">Hear the Free Beat</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <img src="assets/images/Jukes-World-Thumbnail.png" alt="Jukes thumbnail artwork">
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="section-header">
+        <div class="section-label">Featured</div>
+        <h2>First listen</h2>
+        <div class="section-subtext">
+          The front window for the launch: Nara, Flame, Boola, and Wink.
+        </div>
+      </div>
+
+      <div class="beats-grid">
+        <article class="beat-card">
+          <img src="assets/images/Jukes-World-Thumbnail.png" alt="Nara artwork">
+          <div class="beat-card-body">
+            <div class="beat-role">Featured</div>
+            <h3>Nara</h3>
+            <audio controls preload="none">
+              <source src="assets/audio/Nara-preview.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </article>
+
+        <article class="beat-card">
+          <img src="assets/images/Jukes-World-Thumbnail.png" alt="Flame artwork">
+          <div class="beat-card-body">
+            <div class="beat-role">Featured</div>
+            <h3>Flame</h3>
+            <audio controls preload="none">
+              <source src="assets/audio/Flame-preview.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </article>
+
+        <article class="beat-card">
+          <img src="assets/images/Jukes-World-Thumbnail.png" alt="Boola artwork">
+          <div class="beat-card-body">
+            <div class="beat-role">Featured</div>
+            <h3>Boola</h3>
+            <audio controls preload="none">
+              <source src="assets/audio/Boola-preview.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </article>
+
+        <article class="beat-card">
+          <img src="assets/images/Jukes-World-Thumbnail.png" alt="Wink artwork">
+          <div class="beat-card-body">
+            <div class="beat-role">Featured</div>
+            <h3>Wink</h3>
+            <audio controls preload="none">
+              <source src="assets/audio/Wink-preview.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </article>
+      </div>
+
+      <div class="callout">
         <div>
-          <span class="eyebrow">Parent Brand Site</span>
-          <h1>One world,<br />two lanes.</h1>
-          <p>
-            Jukes World is built as a single creative home with a clear split between Music and Art. This structure keeps the brand unified, professional, and easy to grow.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/music/">Enter Music</a>
-            <a class="button button-secondary" href="/art/">Enter Art</a>
-          </div>
-          <div class="badge-row">
-            <span class="badge">Shared master identity</span>
-            <span class="badge">Separate branch accents</span>
-            <span class="badge">GitHub-ready static build</span>
-          </div>
+          <strong>Full launch page is ready.</strong>
+          <p>Use the full beats page to hear all featured tracks, supporting cuts, and the free beat.</p>
         </div>
-
-        <div class="panel hero-visual">
-          <img
-            class="hero-artwork"
-            src="/assets/images/jukesworld-alias-full.jpg"
-            alt="Jukes World alias artwork with cartoon character on speakers"
-          />
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="small-label">Brand Split</span>
-            <h2>Two branches under one identity</h2>
-          </div>
-        </div>
-
-        <div class="split-grid">
-          <article class="split-card music">
-            <span class="kicker">Music Branch</span>
-            <h3>Sound, releases, beats, and licensing</h3>
-            <p>
-              The music side is built for discovery and conversion: latest release, beat offerings, licensing details, credits, and clear work-with-Jukes calls to action.
-            </p>
-            <div class="inline-actions">
-              <a class="button button-music" href="/music/">Go to Music</a>
-            </div>
-          </article>
-
-          <article class="split-card art">
-            <span class="kicker">Art Branch</span>
-            <h3>Gallery, projects, prints, and commissions</h3>
-            <p>
-              The art side is built to feel more gallery-forward: featured pieces, project collections, print offerings, commission details, and process-driven storytelling.
-            </p>
-            <div class="inline-actions">
-              <a class="button button-art" href="/art/">Go to Art</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="small-label">Homepage Highlights</span>
-            <h2>Lead with a hub, not a content dump</h2>
-          </div>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <span class="kicker">Featured Music</span>
-            <h3>Latest release / current push</h3>
-            <p>Keep one main music focus above the fold when needed: a single release, beat pack, video, or campaign you want people to act on right now.</p>
-            <div class="placeholder-media">Embedded player or release artwork placeholder</div>
-          </article>
-
-          <article class="feature-card">
-            <span class="kicker">Featured Art</span>
-            <h3>Selected work / current collection</h3>
-            <p>Use one visual story at a time so the homepage feels intentional. This is where you place the strongest featured artwork or current collection preview.</p>
-            <div class="placeholder-media">Gallery teaser or featured artwork placeholder</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="small-label">Shared Foundation</span>
-            <h2>What stays consistent across the site</h2>
-          </div>
-        </div>
-
-        <div class="stats-grid">
-          <article class="stat-card">
-            <h3>Logo & wordmark</h3>
-            <p>One parent-brand system with room for future branch variations.</p>
-          </article>
-          <article class="stat-card">
-            <h3>Core typography</h3>
-            <p>Shared type choices create continuity between Music and Art.</p>
-          </article>
-          <article class="stat-card">
-            <h3>Master palette</h3>
-            <p>Neutral base colors plus one accent direction for each branch.</p>
-          </article>
-          <article class="stat-card">
-            <h3>Contact funnel</h3>
-            <p>One about story, one email list, one primary contact structure.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container about-grid">
-        <article class="content-card">
-          <span class="kicker">About Preview</span>
-          <h3>The world behind the work</h3>
-          <p>
-            Use this section to introduce the wider creative identity: who Jukes is, what connects the music and the art, and what people should feel when they enter the brand.
-          </p>
-          <a class="button button-secondary" href="/about/">Read About</a>
-        </article>
-
-        <article class="content-card signup">
-          <span class="kicker">Email Capture</span>
-          <h3>Own the audience</h3>
-          <p>Collect email subscribers from one central form so the brand can speak directly to listeners, collectors, and supporters.</p>
-          <form class="signup-form" data-demo-form>
-            <input class="input input-grow" type="email" placeholder="Email address" aria-label="Email address" />
-            <button class="button button-primary" type="submit">Join the List</button>
-            <p class="notice" data-form-output>Placeholder form for now.</p>
-          </form>
-        </article>
+        <a class="button primary" href="beats.html">Open Beats Page</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="brand-lockup">
-          <div class="brand-mark brand-mark-image">
-            <img src="/assets/images/jukesworld-logo.png" alt="Jukes World logo" />
-          </div>
-          <div class="brand-text">
-            <strong>Jukes World</strong>
-            <span>Music + Art</span>
-          </div>
-        </div>
-        <p>A unified creative brand with distinct music and art branches.</p>
-      </div>
-
-      <div>
-        <h4>Explore</h4>
-        <div class="footer-links">
-          <a href="/music/">Music</a>
-          <a href="/art/">Art</a>
-          <a href="/about/">About</a>
-          <a href="/contact/">Contact</a>
-        </div>
-      </div>
-
-      <div>
-        <h4>Placeholders</h4>
-        <small>
-          Swap in your future logo, wordmark, artist statement, embeds, store links, commission form, and newsletter platform when ready.
-        </small>
-      </div>
-    </div>
+  <footer class="site-footer">
+    <div class="container">© Jukes. All rights reserved.</div>
   </footer>
-
-  <script src="/script.js"></script>
 </body>
 </html>
