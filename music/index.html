@@ -360,7 +360,7 @@
       }
 
       .beat-player-actions {
-        grid-template-columns: 1fr;
+        justify-content: flex-start;
       }
     }
   </style>
@@ -542,14 +542,14 @@
             </article>
 
             <article class="beat-card">
-              <button class="beat-trigger" type="button" data-title="Sour Patch" data-role="Supporting" data-preview="/assets/audio/Sour-Patch-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
+              <button class="beat-trigger" type="button" data-title="Sour Patch (TDs)" data-role="Supporting" data-preview="/assets/audio/Sour-Patch-preview.mp3" data-image="/assets/images/Jukes-World-Thumbnail.png" data-description="Supporting cut in the current collection." data-note="Preview stream only. All rights reserved.">
                 <div class="beat-thumb-wrap">
-                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Sour Patch" />
+                  <img class="beat-thumb" src="/assets/images/Jukes-World-Thumbnail.png" alt="Artwork for Sour Patch (TDs)" />
                   <span class="beat-open-chip">Listen</span>
                 </div>
                 <div class="beat-copy">
                   <span class="beat-role">Supporting</span>
-                  <div class="beat-title-row"><h3>Sour Patch</h3></div>
+                  <div class="beat-title-row"><h3>Sour Patch (TDs)</h3></div>
                   <p>Supporting cut in the current collection.</p>
                 </div>
               </button>
@@ -681,6 +681,15 @@
 
       let currentIndex = -1;
 
+      function tryAutoplay() {
+        const playPromise = audio.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch((error) => {
+            console.error("Audio autoplay failed:", error);
+          });
+        }
+      }
+
       function closeModal() {
         modal.classList.remove("open");
         modal.setAttribute("aria-hidden", "true");
@@ -692,7 +701,7 @@
         currentIndex = -1;
       }
 
-      function renderBeat(index) {
+      function renderBeat(index, autoplay = false) {
         const trigger = triggers[index];
         if (!trigger) return;
 
@@ -725,12 +734,20 @@
           downloadButton.classList.remove("show");
           downloadButton.removeAttribute("href");
         }
+
+        if (autoplay) {
+          const handleCanPlay = () => {
+            tryAutoplay();
+            audio.removeEventListener("canplay", handleCanPlay);
+          };
+          audio.addEventListener("canplay", handleCanPlay);
+        }
       }
 
       function openModal(index) {
-        renderBeat(index);
         modal.classList.add("open");
         modal.setAttribute("aria-hidden", "false");
+        renderBeat(index, true);
       }
 
       triggers.forEach((trigger, index) => {
@@ -740,13 +757,13 @@
       prevButton.addEventListener("click", () => {
         if (currentIndex === -1) return;
         const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-        renderBeat(nextIndex);
+        renderBeat(nextIndex, true);
       });
 
       nextButton.addEventListener("click", () => {
         if (currentIndex === -1) return;
         const nextIndex = (currentIndex + 1) % triggers.length;
-        renderBeat(nextIndex);
+        renderBeat(nextIndex, true);
       });
 
       closeButton.addEventListener("click", closeModal);
@@ -761,11 +778,13 @@
         if (event.key === "Escape") {
           closeModal();
         } else if (event.key === "ArrowLeft") {
+          if (currentIndex === -1) return;
           const nextIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-          renderBeat(nextIndex);
+          renderBeat(nextIndex, true);
         } else if (event.key === "ArrowRight") {
+          if (currentIndex === -1) return;
           const nextIndex = (currentIndex + 1) % triggers.length;
-          renderBeat(nextIndex);
+          renderBeat(nextIndex, true);
         }
       });
     })();
