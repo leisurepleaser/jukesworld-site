@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jukes World — Music</title>
-  <meta name="description" content="Music branch of Jukes World: releases, beats, licensing, credits, and work inquiries." />
+  <title>Jukes World — Music & Art</title>
+  <meta name="description" content="Jukes World is one creative brand with two branches: Music and Art." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body class="music-page">
+<body>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand-lockup" href="/">
@@ -19,15 +19,15 @@
         </div>
         <div class="brand-text">
           <strong>Jukes World</strong>
-          <span>Music branch</span>
+          <span>Music + Art</span>
         </div>
       </a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>Menu</button>
 
       <nav class="main-nav" aria-label="Primary" data-nav>
-        <a href="/">Home</a>
-        <a class="active" href="/music/">Music</a>
+        <a class="active" href="/">Home</a>
+        <a href="/music/">Music</a>
         <a href="/art/">Art</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
@@ -36,124 +36,147 @@
   </header>
 
   <main>
-    <section class="page-hero">
-      <div class="container">
-        <div class="panel">
-          <span class="eyebrow">Music</span>
-          <h1>Built to be heard.</h1>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Parent Brand Site</span>
+          <h1>One world,<br />two lanes.</h1>
           <p>
-            This branch is where listeners, collaborators, supervisors, and clients land. Keep the structure focused: releases, beats, licensing, credits, and a clear path to work with Jukes.
+            Jukes World is built as a single creative home with a clear split between Music and Art. This structure keeps the brand unified, professional, and easy to grow.
           </p>
-          <div class="inline-nav">
-            <a href="#releases">Releases</a>
-            <a href="#beats">Beats</a>
-            <a href="#licensing">Licensing</a>
-            <a href="#credits">Credits</a>
-            <a href="#work">Work With Jukes</a>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/music/">Enter Music</a>
+            <a class="button button-secondary" href="/art/">Enter Art</a>
           </div>
+          <div class="badge-row">
+            <span class="badge">Shared master identity</span>
+            <span class="badge">Separate branch accents</span>
+            <span class="badge">GitHub-ready static build</span>
+          </div>
+        </div>
+
+        <div class="panel hero-visual">
+          <img
+            class="hero-artwork"
+            src="/assets/images/jukesworld-alias-full.jpg"
+            alt="Jukes World alias artwork with cartoon character on speakers"
+          />
         </div>
       </div>
     </section>
 
-    <section id="releases">
+    <section>
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="small-label">Section 01</span>
-            <h2>Releases</h2>
+            <span class="small-label">Brand Split</span>
+            <h2>Two branches under one identity</h2>
           </div>
         </div>
-        <div class="card-grid">
-          <article class="content-card">
-            <span class="kicker">Featured Release</span>
-            <h3>Current single / project placeholder</h3>
-            <p>Use one primary release block with cover art, short copy, and streaming links. This should be the main thing casual visitors see first.</p>
-            <div class="placeholder-media">Streaming embed / artwork placeholder</div>
+
+        <div class="split-grid">
+          <article class="split-card music">
+            <span class="kicker">Music Branch</span>
+            <h3>Sound, releases, beats, and licensing</h3>
+            <p>
+              The music side is built for discovery and conversion: latest release, beat offerings, licensing details, credits, and clear work-with-Jukes calls to action.
+            </p>
+            <div class="inline-actions">
+              <a class="button button-music" href="/music/">Go to Music</a>
+            </div>
           </article>
-          <article class="content-card">
-            <span class="kicker">Release Archive</span>
-            <h3>Past work and catalog</h3>
-            <p>Use this area for earlier releases, grouped by singles, EPs, albums, or eras. Keep it clean so the branch feels curated rather than cluttered.</p>
-            <ul class="clean-list">
-              <li>Release tile placeholder</li>
-              <li>Release tile placeholder</li>
-              <li>Release tile placeholder</li>
-            </ul>
+
+          <article class="split-card art">
+            <span class="kicker">Art Branch</span>
+            <h3>Gallery, projects, prints, and commissions</h3>
+            <p>
+              The art side is built to feel more gallery-forward: featured pieces, project collections, print offerings, commission details, and process-driven storytelling.
+            </p>
+            <div class="inline-actions">
+              <a class="button button-art" href="/art/">Go to Art</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="beats">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 02</span>
-          <h3>Beats</h3>
-          <p>Position beats as a clear offering. List styles, moods, pricing tiers, or whether they are exclusive, non-exclusive, or custom.</p>
-          <div class="track-preview-card">
-            <h4>Brarie</h4>
-            <p>Preview snippet</p>
-            <audio controls preload="metadata">
-              <source src="/assets/audio/Brarie-preview.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="small-label">Homepage Highlights</span>
+            <h2>Lead with a hub, not a content dump</h2>
           </div>
-        </article>
-        <article class="content-card">
-          <span class="kicker">Suggested buckets</span>
-          <ul class="clean-list">
-            <li>Beat packs or featured instrumentals</li>
-            <li>Custom production inquiry path</li>
-            <li>Short FAQ on turnaround and revisions</li>
-            <li>Links to store or licensing portal</li>
-          </ul>
-        </article>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="kicker">Featured Music</span>
+            <h3>Latest release / current push</h3>
+            <p>Keep one main music focus above the fold when needed: a single release, beat pack, video, or campaign you want people to act on right now.</p>
+            <div class="placeholder-media">Embedded player or release artwork placeholder</div>
+          </article>
+
+          <article class="feature-card">
+            <span class="kicker">Featured Art</span>
+            <h3>Selected work / current collection</h3>
+            <p>Use one visual story at a time so the homepage feels intentional. This is where you place the strongest featured artwork or current collection preview.</p>
+            <div class="placeholder-media">Gallery teaser or featured artwork placeholder</div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="licensing">
-      <div class="container card-grid">
-        <article class="content-card">
-          <span class="kicker">Section 03</span>
-          <h3>Licensing</h3>
-          <p>Make licensing easy to understand. Separate casual browsing from business intent with simple categories and strong next steps.</p>
-          <div class="badge-row">
-            <span class="badge">Personal use</span>
-            <span class="badge">Commercial use</span>
-            <span class="badge">Exclusive buyout</span>
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="small-label">Shared Foundation</span>
+            <h2>What stays consistent across the site</h2>
           </div>
-        </article>
-        <article class="content-card">
-          <span class="kicker">What to include</span>
-          <ul class="clean-list">
-            <li>License type breakdowns</li>
-            <li>Usage rights and limitations</li>
-            <li>How stems are handled</li>
-            <li>Contact path for custom sync or business deals</li>
-          </ul>
-        </article>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <h3>Logo & wordmark</h3>
+            <p>One parent-brand system with room for future branch variations.</p>
+          </article>
+          <article class="stat-card">
+            <h3>Core typography</h3>
+            <p>Shared type choices create continuity between Music and Art.</p>
+          </article>
+          <article class="stat-card">
+            <h3>Master palette</h3>
+            <p>Neutral base colors plus one accent direction for each branch.</p>
+          </article>
+          <article class="stat-card">
+            <h3>Contact funnel</h3>
+            <p>One about story, one email list, one primary contact structure.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="credits">
-      <div class="container card-grid">
+    <section>
+      <div class="container about-grid">
         <article class="content-card">
-          <span class="kicker">Section 04</span>
-          <h3>Credits</h3>
-          <p>This is where you prove range and legitimacy. Add placements, production credits, collaborators, and notable contributions as they grow.</p>
-          <ul class="clean-list">
-            <li>Artist / project credit placeholder</li>
-            <li>Artist / project credit placeholder</li>
-            <li>Artist / project credit placeholder</li>
-          </ul>
+          <span class="kicker">About Preview</span>
+          <h3>The world behind the work</h3>
+          <p>
+            Use this section to introduce the wider creative identity: who Jukes is, what connects the music and the art, and what people should feel when they enter the brand.
+          </p>
+          <a class="button button-secondary" href="/about/">Read About</a>
         </article>
-        <article class="content-card" id="work">
-          <span class="kicker">Section 05</span>
-          <h3>Work With Jukes</h3>
-          <p>Use one direct CTA for collaborations, production inquiries, custom work, or soundtrack placement. Keep the ask simple and professional.</p>
-          <div class="inline-actions">
-            <a class="button button-music" href="/contact/">Start an Inquiry</a>
-          </div>
+
+        <article class="content-card signup">
+          <span class="kicker">Email Capture</span>
+          <h3>Own the audience</h3>
+          <p>Collect email subscribers from one central form so the brand can speak directly to listeners, collectors, and supporters.</p>
+          <form class="signup-form" data-demo-form>
+            <input class="input input-grow" type="email" placeholder="Email address" aria-label="Email address" />
+            <button class="button button-primary" type="submit">Join the List</button>
+            <p class="notice" data-form-output>Placeholder form for now.</p>
+          </form>
         </article>
       </div>
     </section>
@@ -168,23 +191,27 @@
           </div>
           <div class="brand-text">
             <strong>Jukes World</strong>
-            <span>Music branch</span>
+            <span>Music + Art</span>
           </div>
         </div>
-        <p>Focused on releases, beats, licensing, and collaboration.</p>
+        <p>A unified creative brand with distinct music and art branches.</p>
       </div>
+
       <div>
-        <h4>Browse</h4>
+        <h4>Explore</h4>
         <div class="footer-links">
-          <a href="/">Home</a>
+          <a href="/music/">Music</a>
           <a href="/art/">Art</a>
           <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
         </div>
       </div>
+
       <div>
-        <h4>Need later</h4>
-        <small>Add streaming embeds, beat store links, pricing, contract language, and real credits when ready.</small>
+        <h4>Placeholders</h4>
+        <small>
+          Swap in your future logo, wordmark, artist statement, embeds, store links, commission form, and newsletter platform when ready.
+        </small>
       </div>
     </div>
   </footer>
