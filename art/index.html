@@ -24,8 +24,27 @@
 
     .gallery-hero p {
       max-width: 40rem;
-      margin-bottom: 0;
+      margin-bottom: 16px;
       opacity: 0.85;
+    }
+
+    .gallery-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .gallery-subtle-link {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.84;
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+      padding-bottom: 2px;
+    }
+
+    .gallery-subtle-link:hover {
+      opacity: 1;
     }
 
     .gallery-grid {
@@ -39,25 +58,55 @@
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.03);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
 
-    .gallery-piece button {
+    .gallery-piece:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+    }
+
+    .gallery-piece a {
       width: 100%;
-      border: 0;
-      background: transparent;
       color: inherit;
-      padding: 0;
-      cursor: pointer;
-      font: inherit;
-      text-align: left;
+      text-decoration: none;
       display: block;
+    }
+
+    .gallery-image-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: rgba(255,255,255,0.04);
     }
 
     .gallery-piece img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .gallery-piece:hover img {
+      transform: scale(1.02);
+    }
+
+    .gallery-chip {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(9, 9, 12, 0.72);
+      backdrop-filter: blur(10px);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
     .gallery-piece figcaption {
@@ -117,76 +166,77 @@
           <p>
             Settle in
           </p>
+
+          <div class="gallery-links">
+            <a class="button button-secondary" href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer">Visit the Art Instagram</a>
+            <a class="gallery-subtle-link" href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer">@thelastjuke</a>
+          </div>
         </div>
 
         <section aria-label="Art gallery">
           <div class="gallery-grid">
             <figure class="gallery-piece">
-              <button
-                type="button"
-                data-lightbox-image="/assets/images/tennis-serve-process.png"
-                data-lightbox-alt="Love"
-              >
-                <img
-                  src="/assets/images/tennis-serve-process.png"
-                  alt="Digital tennis illustration showing a player mid-serve"
-                />
+              <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer" aria-label="View more art on Instagram">
+                <div class="gallery-image-wrap">
+                  <img
+                    src="/assets/images/tennis-serve-process.png"
+                    alt="Love"
+                  />
+                  <span class="gallery-chip">View on Instagram</span>
+                </div>
                 <figcaption>
                   <h3>"Love"</h3>
                   <p>Tennis Serve Study</p>
                 </figcaption>
-              </button>
+              </a>
             </figure>
 
             <figure class="gallery-piece">
-              <button
-                type="button"
-                data-lightbox-image="/assets/images/smh-collage.png"
-                data-lightbox-alt="Peg Leg and Co."
-              >
-                <img
-                  src="/assets/images/smh-collage.png"
-                  alt="Digital collage illustration featuring anime-inspired characters"
-                />
+              <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer" aria-label="View more art on Instagram">
+                <div class="gallery-image-wrap">
+                  <img
+                    src="/assets/images/smh-collage.png"
+                    alt="Peg Leg and Co."
+                  />
+                  <span class="gallery-chip">View on Instagram</span>
+                </div>
                 <figcaption>
                   <h3>Peg Leg and Co.</h3>
                   <p>Layered character mash-up.</p>
                 </figcaption>
-              </button>
+              </a>
             </figure>
 
             <figure class="gallery-piece">
-              <button
-                type="button"
-                data-lightbox-image="/assets/images/gordon-digital.png"
-                data-lightbox-alt="Digital illustration portrait of Gordon Ramsay"
-              >
-                <img
-                  src="/assets/images/gordon-digital.png"
-                  alt="Yes Chef"
-                />
+              <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer" aria-label="View more art on Instagram">
+                <div class="gallery-image-wrap">
+                  <img
+                    src="/assets/images/gordon-digital.png"
+                    alt="Yes Chef"
+                  />
+                  <span class="gallery-chip">View on Instagram</span>
+                </div>
                 <figcaption>
                   <h3>Yes Chef</h3>
                   <p>Portrait Study</p>
                 </figcaption>
-              </button>
+              </a>
             </figure>
 
             <figure class="gallery-piece">
-              <button
-                type="button"
-                data-lightbox-image="/assets/images/boy-in-water.png"
-                data-lightbox-alt="Dippin"
-              >
-                <img
-                  src="/assets/images/boy-in-water.png"
-                  alt="Digital illustration of a boy in water between wooden posts"
-                />
+              <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer" aria-label="View more art on Instagram">
+                <div class="gallery-image-wrap">
+                  <img
+                    src="/assets/images/boy-in-water.png"
+                    alt="Dippin"
+                  />
+                  <span class="gallery-chip">View on Instagram</span>
+                </div>
                 <figcaption>
                   <h3>Dippin</h3>
                   <p>Quiet tension and environmental mood.</p>
                 </figcaption>
-              </button>
+              </a>
             </figure>
           </div>
         </section>
@@ -220,8 +270,10 @@
       </div>
 
       <div>
-        <h4>Status</h4>
-        <small>More collections and print layers can come later without changing the gallery base.</small>
+        <h4>Follow</h4>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer">Art Instagram</a>
+        </div>
       </div>
     </div>
   </footer>
