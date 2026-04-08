@@ -311,14 +311,6 @@
       border-color: rgba(255,255,255,0.2);
     }
 
-    .beat-download {
-      display: none;
-    }
-
-    .beat-download.show {
-      display: inline-flex;
-    }
-
     .beat-modal-note {
       margin: 0;
       font-size: 0.92rem;
@@ -342,6 +334,50 @@
       background: rgba(255,255,255,0.12);
     }
 
+    .beat-license-group {
+      display: grid;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .beat-license-heading {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .beat-license-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .beat-license-button {
+      display: none;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .beat-license-button.show {
+      display: inline-flex;
+    }
+
+    .beat-license-button-ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .beat-license-copy {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      opacity: 0.74;
+    }
+
     @media (max-width: 820px) {
       .beat-modal-grid {
         grid-template-columns: 1fr;
@@ -354,6 +390,12 @@
 
       .beat-player-actions {
         justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .beat-license-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -631,9 +673,34 @@
               </div>
 
               <div class="beat-player-right">
-                <a id="beat-download-button" class="button button-primary beat-download" href="#" download>Download Free Beat</a>
                 <a class="button button-secondary" href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
               </div>
+            </div>
+
+            <div class="beat-license-group" aria-label="Licensing options">
+              <p class="beat-license-heading">Licensing Options</p>
+
+              <div class="beat-license-grid">
+                <a id="beat-mp3-button" class="button button-primary beat-license-button" href="#" target="_blank" rel="noopener noreferrer">
+                  Buy MP3 Lease — $29
+                </a>
+
+                <a id="beat-wav-button" class="button button-secondary beat-license-button" href="#" target="_blank" rel="noopener noreferrer">
+                  Buy WAV Lease — $59
+                </a>
+
+                <a id="beat-free-button" class="button button-secondary beat-license-button" href="#">
+                  Get Free Download
+                </a>
+
+                <a id="beat-exclusive-button" class="button button-secondary beat-license-button beat-license-button-ghost" href="/contact/">
+                  Exclusive Inquiry
+                </a>
+              </div>
+
+              <p id="beat-license-copy" class="beat-license-copy">
+                Paid licenses are fulfilled through BeatStars. Free download is for non-commercial use only. Exclusive rights are handled by inquiry only.
+              </p>
             </div>
 
             <p id="beat-modal-note" class="beat-modal-note"></p>
@@ -666,11 +733,75 @@
       const prevButton = document.getElementById("beat-prev-button");
       const nextButton = document.getElementById("beat-next-button");
       const audio = document.getElementById("beat-audio");
-      const downloadButton = document.getElementById("beat-download-button");
+
+      const mp3Button = document.getElementById("beat-mp3-button");
+      const wavButton = document.getElementById("beat-wav-button");
+      const freeButton = document.getElementById("beat-free-button");
+      const exclusiveButton = document.getElementById("beat-exclusive-button");
+      const licenseCopy = document.getElementById("beat-license-copy");
 
       if (!triggers.length || !modal || !audio) return;
 
       let currentIndex = -1;
+
+      const beatLinks = {
+        "Nara": {
+          mp3: "BEATSTARS_NARA_MP3_URL",
+          wav: "BEATSTARS_NARA_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Nara"
+        },
+        "Flame": {
+          mp3: "BEATSTARS_FLAME_MP3_URL",
+          wav: "BEATSTARS_FLAME_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Flame"
+        },
+        "Boola": {
+          mp3: "BEATSTARS_BOOLA_MP3_URL",
+          wav: "BEATSTARS_BOOLA_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Boola"
+        },
+        "Wink": {
+          mp3: "BEATSTARS_WINK_MP3_URL",
+          wav: "BEATSTARS_WINK_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Wink"
+        },
+        "Tella": {
+          mp3: "BEATSTARS_TELLA_MP3_URL",
+          wav: "BEATSTARS_TELLA_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Tella"
+        },
+        "Intake": {
+          mp3: "BEATSTARS_INTAKE_MP3_URL",
+          wav: "BEATSTARS_INTAKE_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Intake"
+        },
+        "Buy Me Flours": {
+          mp3: "BEATSTARS_BUY_ME_FLOURS_MP3_URL",
+          wav: "BEATSTARS_BUY_ME_FLOURS_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Buy%20Me%20Flours"
+        },
+        "Simulation": {
+          mp3: "BEATSTARS_SIMULATION_MP3_URL",
+          wav: "BEATSTARS_SIMULATION_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Simulation"
+        },
+        "Sour Patch": {
+          mp3: "BEATSTARS_SOUR_PATCH_MP3_URL",
+          wav: "BEATSTARS_SOUR_PATCH_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Sour%20Patch"
+        },
+        "Brarie": {
+          mp3: "BEATSTARS_BRARIE_MP3_URL",
+          wav: "BEATSTARS_BRARIE_WAV_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Brarie"
+        },
+        "Tier 4": {
+          mp3: "BEATSTARS_TIER_4_MP3_URL",
+          wav: "BEATSTARS_TIER_4_WAV_URL",
+          free: "BEATSTARS_TIER_4_FREE_URL",
+          exclusive: "/contact/?inquiry=exclusive&beat=Tier%204"
+        }
+      };
 
       function tryAutoplay() {
         const playPromise = audio.play();
@@ -681,14 +812,59 @@
         }
       }
 
+      function resetLink(button) {
+        if (!button) return;
+        button.classList.remove("show");
+        button.removeAttribute("href");
+        button.removeAttribute("download");
+        button.removeAttribute("target");
+        button.removeAttribute("rel");
+      }
+
+      function setLink(button, href, options = {}) {
+        if (!button || !href) {
+          resetLink(button);
+          return;
+        }
+
+        const { download = false, target = null } = options;
+        const isExternal = /^https?:\/\//i.test(href);
+
+        button.href = href;
+
+        if (download) {
+          button.setAttribute("download", "");
+        } else {
+          button.removeAttribute("download");
+        }
+
+        if (target) {
+          button.setAttribute("target", target);
+        } else {
+          button.setAttribute("target", isExternal ? "_blank" : "_self");
+        }
+
+        if (isExternal || button.getAttribute("target") === "_blank") {
+          button.setAttribute("rel", "noopener noreferrer");
+        } else {
+          button.removeAttribute("rel");
+        }
+
+        button.classList.add("show");
+      }
+
       function closeModal() {
         modal.classList.remove("open");
         modal.setAttribute("aria-hidden", "true");
         audio.pause();
         audio.removeAttribute("src");
         audio.load();
-        downloadButton.classList.remove("show");
-        downloadButton.removeAttribute("href");
+
+        resetLink(mp3Button);
+        resetLink(wavButton);
+        resetLink(freeButton);
+        resetLink(exclusiveButton);
+
         currentIndex = -1;
       }
 
@@ -704,6 +880,7 @@
         const image = trigger.dataset.image || "";
         const note = trigger.dataset.note || "";
         const full = trigger.dataset.full || "";
+        const links = beatLinks[title] || {};
 
         modalTitle.textContent = title;
         modalRole.textContent = role;
@@ -716,12 +893,29 @@
         audio.src = preview;
         audio.load();
 
-        if (full) {
-          downloadButton.href = full;
-          downloadButton.classList.add("show");
+        setLink(mp3Button, links.mp3);
+        setLink(wavButton, links.wav);
+
+        if (links.free) {
+          setLink(freeButton, links.free, { target: "_blank" });
+        } else if (full) {
+          setLink(freeButton, full, { download: true, target: "_self" });
         } else {
-          downloadButton.classList.remove("show");
-          downloadButton.removeAttribute("href");
+          resetLink(freeButton);
+        }
+
+        setLink(
+          exclusiveButton,
+          links.exclusive || `/contact/?inquiry=exclusive&beat=${encodeURIComponent(title)}`,
+          { target: "_self" }
+        );
+
+        if (role.toLowerCase() === "free") {
+          licenseCopy.textContent =
+            "Paid licenses are fulfilled through BeatStars. Free download is for non-commercial use only. Commercial release requires a paid license. Exclusive rights are handled by inquiry only.";
+        } else {
+          licenseCopy.textContent =
+            "Paid licenses are fulfilled through BeatStars. Exclusive rights are handled by inquiry only.";
         }
 
         if (autoplay) {
