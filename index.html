@@ -133,7 +133,7 @@
     <div class="container nav-wrap">
       <a class="brand-lockup" href="/">
         <div class="brand-mark brand-mark-image">
-          <img src="/assets/images/jukesworld-logo.png" alt="Jukes World logo" />
+          <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes World thumbnail artwork" />
         </div>
         <div class="brand-text">
           <strong>Jukes World</strong>
@@ -197,10 +197,13 @@
           <div>
             <span class="home-kicker">Art Gallery</span>
             <h2>Browse the gallery.</h2>
-          
+            <p>
+              The art side is being kept simpler for now so the music can lead, while the gallery also points viewers toward the art Instagram for updates and future work.
+            </p>
 
             <div class="home-actions">
-              <a class="button button-secondary" href="/art/">Take a look</a>
+              <a class="button button-secondary" href="/art/">View the Gallery</a>
+              <a class="home-subtle-link" href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer">@thelastjuke</a>
             </div>
           </div>
         </article>
@@ -213,7 +216,7 @@
       <div>
         <div class="brand-lockup">
           <div class="brand-mark brand-mark-image">
-            <img src="/assets/images/jukesworld-logo.png" alt="Jukes World logo" />
+            <img src="/assets/images/Jukes-World-Thumbnail.png" alt="Jukes World thumbnail artwork" />
           </div>
           <div class="brand-text">
             <strong>Jukes World</strong>
@@ -236,23 +239,13 @@
       <div>
         <h4>Follow</h4>
         <div class="footer-links">
-          <a href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.instagram.com/jukesmakemoves/" target="_blank" rel="noopener noreferrer">Music Instagram</a>
+          <a href="https://www.instagram.com/thelastjuke/" target="_blank" rel="noopener noreferrer">Art Instagram</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    const menuToggle = document.querySelector("[data-menu-toggle]");
-    const nav = document.querySelector("[data-nav]");
-
-    if (menuToggle && nav) {
-      menuToggle.addEventListener("click", () => {
-        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-        menuToggle.setAttribute("aria-expanded", String(!expanded));
-        nav.classList.toggle("open");
-      });
-    }
-  </script>
+  <script src="/script.js"></script>
 </body>
 </html>
